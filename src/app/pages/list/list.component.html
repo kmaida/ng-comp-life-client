@@ -1,0 +1,18 @@
+<h1 class="text-center">Async Pipe with AfterViewInit</h1>
+
+<ng-template #noDinos>
+  <p *ngIf="loading" class="m-2 text-center">Loading...</p>
+  <div *ngIf="error" class="alert alert-danger">
+    An error occurred fetching dinosaurs data. Please try again.
+  </div>
+</ng-template>
+
+<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+  <ul>
+    <li *ngFor="let dino of dinoList" #dinoLoop>
+      <div id="dino-{{dino.id}}">
+        <a href="#dino-{{dino.id}}">{{dino.id}} {{dino.name}}</a>
+      </div>
+    </li>
+  </ul>
+</div>

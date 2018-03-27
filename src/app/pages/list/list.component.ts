@@ -25,6 +25,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private api: ApiService
   ) {
+    this._getHash();
     this.dinoList$ = api.getDinos$()
       .pipe(
         tap(
@@ -38,7 +39,6 @@ export class ListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this._getHash();
   }
 
   ngAfterViewInit() {

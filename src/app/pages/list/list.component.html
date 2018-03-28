@@ -9,10 +9,11 @@
 
 <div *ngIf="dinoList$ | async as dinoList; else noDinos">
   <ul>
-    <li *ngFor="let dino of dinoList" #dinoLoop>
-      <div id="{{dino.name | lowercase}}">
-        <a href="#{{dino.name | lowercase}}">{{dino.id}} {{dino.name}}</a>
-      </div>
+    <li
+      *ngFor="let dino of dinoList"
+      id="{{dino.name | lowercase}}"
+      #dinoLoop>
+      <a href="#{{dino.name | lowercase}}">{{dino.id}} {{dino.name}}</a>
     </li>
   </ul>
 </div>

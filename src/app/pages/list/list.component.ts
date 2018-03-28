@@ -45,11 +45,10 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.initDinoLoopSub = this.dinoList.changes.subscribe(
       (changes: QueryList<any>) => {
         if (this.scrollId) {
-          const parentElement = changes.find(
-            (el) => el.nativeElement.childNodes[1].attributes[1].nodeValue === this.scrollId
+          const scrollElement = changes.find(
+            (el) => el.nativeElement.id === this.scrollId
           );
-          const element = parentElement.nativeElement.children[0];
-          const top = element.offsetTop || document.body.clientTop || 0;
+          const top = scrollElement.nativeElement.offsetTop || document.body.clientTop || 0;
           window.scrollTo(0, top);
         }
         this.initDinoLoopSub.unsubscribe();
@@ -69,6 +68,11 @@ export class ListComponent implements OnInit, AfterViewInit {
         }
       }
     );
+  }
+
+  scrollToElement(element) {
+    const top = element.offsetTop || document.body.clientTop || 0;
+    window.scrollTo(0, top);
   }
 
 }

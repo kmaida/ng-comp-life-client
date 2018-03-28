@@ -59,7 +59,7 @@
       "spec": false
     },
     "component": {
-      "spec": false
+      "spec": true
     },
     "directive": {
       "spec": false

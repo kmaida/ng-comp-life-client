@@ -5,14 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { ListComponent } from './pages/list/list.component';
 import { ApiService } from './api.service';
+import { DinosComponent } from './pages/dinos/dinos.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
+    DinosComponent
   ],
   imports: [
     BrowserModule,

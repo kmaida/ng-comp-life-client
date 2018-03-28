@@ -7,11 +7,11 @@ import { IDinosaur } from '../../dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-dinos',
+  templateUrl: './dinos.component.html',
+  styleUrls: ['./dinos.component.css']
 })
-export class ListComponent implements OnInit, AfterViewInit {
+export class DinosComponent implements OnInit, AfterViewInit {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoLoop') dinoList: QueryList<any>;
@@ -25,7 +25,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private api: ApiService
   ) {
-    this._getHash();
+    this._setInitScrollId();
     this.dinoList$ = api.getDinos$()
       .pipe(
         tap(
@@ -56,7 +56,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  private _getHash() {
+  private _setInitScrollId() {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
         if (fragment && !this.ngForRendered) {
@@ -69,5 +69,4 @@ export class ListComponent implements OnInit, AfterViewInit {
       }
     );
   }
-
 }

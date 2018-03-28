@@ -8,7 +8,7 @@ import { IDinosaur } from './dinosaur.model';
 
 @Injectable()
 export class ApiService {
-  private _API = 'https://dinoapi.kmaida.net/';
+  private _API = 'http://dinoapi.kmaida.net/';
 
   constructor(private http: HttpClient) { }
 

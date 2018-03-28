@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit, QueryList } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,7 +14,7 @@ import { tap } from 'rxjs/operators';
 export class ListComponent implements OnInit, AfterViewInit {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
-  @ViewChildren('dinoLoop') dinoList;
+  @ViewChildren('dinoLoop') dinoList: QueryList<any>;
   initDinoLoopSub: Subscription;
   ngForRendered: boolean;
   scrollId: string;
@@ -43,11 +43,15 @@ export class ListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.initDinoLoopSub = this.dinoList.changes.subscribe(
-      () => {
-        if (this.scrollId && !this.ngForRendered) {
-          this.scrollToAnchor(this.scrollId);
+      (changes: QueryList<any>) => {
+        if (this.scrollId) {
+          const parentElement = changes.find(
+            (el) => el.nativeElement.childNodes[1].attributes[1].nodeValue === this.scrollId
+          );
+          const element = parentElement.nativeElement.children[0];
+          const top = element.offsetTop || document.body.clientTop || 0;
+          window.scrollTo(0, top);
         }
-        this.ngForRendered = true;
         this.initDinoLoopSub.unsubscribe();
       }
     );
@@ -62,22 +66,9 @@ export class ListComponent implements OnInit, AfterViewInit {
           // If fragment is found, set scrollId from
           // pageload's hash; scroll takes place on AfterViewInit
           this.scrollId = fragment;
-        } else if (fragment && this.ngForRendered) {
-          this.scrollToAnchor(fragment);
         }
       }
     );
-  }
-
-  scrollToAnchor(id: string) {
-    const element = document.getElementById(id);
-    if (this.ngForRendered) {
-      this.initDinoLoopSub.unsubscribe();
-    }
-    if (element) {
-      const top = element.offsetTop || document.body.clientTop || 0;
-      window.scrollTo(0, top);
-    }
   }
 
 }

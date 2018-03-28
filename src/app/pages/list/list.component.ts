@@ -70,9 +70,4 @@ export class ListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  scrollToElement(element) {
-    const top = element.offsetTop || document.body.clientTop || 0;
-    window.scrollTo(0, top);
-  }
-
 }

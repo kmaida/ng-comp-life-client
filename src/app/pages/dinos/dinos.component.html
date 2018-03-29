@@ -1,10 +1,8 @@
 <p class="text-center lead">Async Pipe with template reference variables, NgIfElse, and AfterViewInit</p>
 
 <ng-template #noDinos>
-  <p *ngIf="loading" class="m-2 text-center">Loading...</p>
-  <div *ngIf="error" class="alert alert-danger">
-    An error occurred fetching dinosaurs data. Please try again.
-  </div>
+  <app-loading *ngIf="loading"></app-loading>
+  <app-error *ngIf="error"></app-error>
 </ng-template>
 
 <div *ngIf="dinoList$ | async as dinoList; else noDinos">

@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewChildren,
   AfterViewInit,
-  QueryList
+  QueryList,
+  ElementRef
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -64,10 +65,10 @@ export class DinosComponent implements OnInit, AfterViewInit {
     this.initDinoLoopSub = this.dinoList.changes.subscribe(
       (changes: QueryList<any>) => {
         if (this.scrollId) {
-          const scrollElement = changes.find(
-            (el) => el.nativeElement.id === this.scrollId
+          const scrollElementRef = changes.find(
+            (el: ElementRef) => el.nativeElement.id === this.scrollId
           );
-          this.scrollToAnchor(scrollElement);
+          this.scrollToAnchor(scrollElementRef.nativeElement);
         }
         this.initDinoLoopSub.unsubscribe();
       }
@@ -75,7 +76,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
   }
 
   scrollToAnchor(element) {
-    const top = element.nativeElement.offsetTop || document.body.clientTop || 0;
-    window.scrollTo(0, top);
+    const pos = element.offsetTop || document.body.clientTop || 0;
+    window.scrollTo(0, pos);
   }
 }

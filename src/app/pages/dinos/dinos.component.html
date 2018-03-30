@@ -14,7 +14,10 @@
       *ngFor="let dino of dinoList"
       id="{{dino.name | lowercase}}"
       #dinoLoop>
-      <a href="#{{dino.name | lowercase}}">{{dino.name}}</a>
+      <a
+        [routerLink]="['/dinos-final']"
+        fragment="{{dino.name | lowercase}}"
+        (click)="scrollToAnchor(dinoLoop)">{{dino.name}}</a>
     </li>
   </ul>
 </div>

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -10,6 +11,7 @@ import { LoadingComponent } from './core/loading.component';
 import { ErrorComponent } from './core/error.component';
 
 import { DinosComponent } from './pages/dinos/dinos.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -17,12 +19,14 @@ import { DinosComponent } from './pages/dinos/dinos.component';
     AppComponent,
     DinosComponent,
     LoadingComponent,
-    ErrorComponent
+    ErrorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule
   ],
   providers: [
     ApiService

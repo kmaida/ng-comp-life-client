@@ -67,11 +67,15 @@ export class DinosComponent implements OnInit, AfterViewInit {
           const scrollElement = changes.find(
             (el) => el.nativeElement.id === this.scrollId
           );
-          const top = scrollElement.nativeElement.offsetTop || document.body.clientTop || 0;
-          window.scrollTo(0, top);
+          this.scrollToAnchor(scrollElement);
         }
         this.initDinoLoopSub.unsubscribe();
       }
     );
+  }
+
+  scrollToAnchor(element) {
+    const top = element.nativeElement.offsetTop || document.body.clientTop || 0;
+    window.scrollTo(0, top);
   }
 }

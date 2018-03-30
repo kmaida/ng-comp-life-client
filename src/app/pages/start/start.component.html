@@ -7,10 +7,7 @@
 <app-error *ngIf="error"></app-error>
 
 <div *ngIf="dinoList">
-  <div *ngFor="let dino of dinoList" class="card my-2">
-    <div class="card-body">
-      <h5 class="card-title">{{ dino.name }}</h5>
-      <p class="card-text" [innerHTML]="dino.info"></p>
-    </div>
-  </div>
+  <app-dino
+    *ngFor="let dino of dinoList"
+    [dino]="dino"></app-dino>
 </div>

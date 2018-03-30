@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-async',
   templateUrl: './async.component.html',
-  styleUrls: ['./async.component.css']
+  styles: []
 })
 export class AsyncComponent implements OnInit {
   dinoList$: Observable<IDinosaur[]>;

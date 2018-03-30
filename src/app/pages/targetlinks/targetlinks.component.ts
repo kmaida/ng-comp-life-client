@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-targetlinks',
   templateUrl: './targetlinks.component.html',
-  styleUrls: ['./targetlinks.component.css']
+  styles: []
 })
 export class TargetlinksComponent implements OnInit {
   dinoList$: Observable<IDinosaur[]>;

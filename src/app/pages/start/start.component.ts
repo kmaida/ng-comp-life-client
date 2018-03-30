@@ -7,7 +7,7 @@ import { IDinosaur } from './../../core/dinosaur.model';
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css']
+  styles: []
 })
 export class StartComponent implements OnInit, OnDestroy {
   dinoListSub: Subscription;

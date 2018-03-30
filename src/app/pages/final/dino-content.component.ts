@@ -7,8 +7,11 @@ import { IDinosaur } from '../../core/dinosaur.model';
     <div class="card my-2">
       <div class="card-body">
         <h5 class="card-title">
-          <ng-content></ng-content>
+          <ng-content select="a"></ng-content>
         </h5>
+        <div class="card-text">
+          <ng-content select=".notes"></ng-content>
+        </div>
         <div class="card-text">
           <ul class="list-unstyled">
             <li><em>{{ dino.pronunciation }}</em> / "{{ dino.meaningOfName }}"</li>

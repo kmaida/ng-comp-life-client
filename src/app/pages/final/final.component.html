@@ -1,6 +1,6 @@
-<h1 class="text-center">DINOSAURS</h1>
+<h1 class="text-center">Dinosaurs</h1>
 <p class="text-center lead">
-  Async Pipe with template reference variables, NgIfElse, AfterViewInit, and Content Projection
+  Async Pipe with template reference variables, NgIfElse, AfterViewInit, and multiple Content Projection
 </p>
 
 <ng-template #noDinos>
@@ -18,6 +18,9 @@
         [routerLink]="['/final']"
         fragment="{{dino.name | lowercase}}"
         (click)="scrollToAnchor(dinoElement)">{{ dino.name }}</a>
+      <p class="notes">
+        {{ dino.name === 'Giganotosaurus' ? 'aka "Chickennuggetsaurus"': null }}
+      </p>
     </app-dino-content>
   </div>
 </div>

@@ -9,17 +9,16 @@
 </ng-template>
 
 <div *ngIf="dinoList$ | async as dinoList; else noDinos">
-  <ul>
-    <li
-      *ngFor="let dino of dinoList"
-      id="{{dino.name | lowercase}}"
-      #dinoElement>
-      <a
-        [routerLink]="['/afterviewinit']"
-        fragment="{{dino.name | lowercase}}"
-        (click)="scrollToAnchor(dinoElement)">
-        <h3>{{dino.name}}</h3>
-      </a>
-    </li>
-  </ul>
+  <div
+    *ngFor="let dino of dinoList"
+    id="{{dino.name | lowercase}}"
+    class="py-4 my-4"
+    #dinoElement>
+    <a
+      [routerLink]="['/afterviewinit']"
+      fragment="{{dino.name | lowercase}}"
+      (click)="scrollToAnchor(dinoElement)">
+      <h3>{{dino.name}}</h3>
+    </a>
+  </div>
 </div>

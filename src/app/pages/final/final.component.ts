@@ -15,7 +15,9 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-final',
   templateUrl: './final.component.html',
-  styleUrls: ['./final.component.css']
+  styles: [`
+    :host ::ng-deep .notes { color: red; }
+  `]
 })
 export class FinalComponent implements AfterViewInit {
   hashSub: Subscription;

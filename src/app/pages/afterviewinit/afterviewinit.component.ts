@@ -15,7 +15,7 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-afterviewinit',
   templateUrl: './afterviewinit.component.html',
-  styleUrls: ['./afterviewinit.component.css']
+  styles: []
 })
 export class AfterviewinitComponent implements AfterViewInit {
   hashSub: Subscription;

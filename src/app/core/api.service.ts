@@ -12,10 +12,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getLocalDinos$(): Observable<IDinosaur[]> {
+    return this.http.get(`${this._API}dinosaurs`).pipe(
+      catchError((err, caught) => this._onError(err, caught))
+    );
+  }
+
   getDinos$(): Observable<IDinosaur[]> {
-    // We can change this endpoint to simulate a live environment
-    // dinosaurs (local)
-    // delay/dinosaurs (simulate live)
+    // Simulates live environment by using the delayed endpoint
     return this.http.get(`${this._API}delay/dinosaurs`).pipe(
       catchError((err, caught) => this._onError(err, caught))
     );

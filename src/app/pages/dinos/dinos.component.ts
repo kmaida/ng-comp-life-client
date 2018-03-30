@@ -63,7 +63,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.initDinoElementSub = this.dinoList.changes.subscribe(
-      (changes: QueryList<any>) => {
+      (changes: QueryList<ElementRef>) => {
         if (this.scrollId) {
           const scrollElementRef = changes.find(
             (el: ElementRef) => el.nativeElement.id === this.scrollId

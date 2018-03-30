@@ -16,15 +16,12 @@ export class ApiService {
     // We can change this endpoint to simulate a live environment
     // dinosaurs (local)
     // delay/dinosaurs (simulate live)
-    return this.http.get(`${this._API}delay/dinosaurs`)
-      .pipe(
-        catchError((err, caught) => this._onError(err, caught))
-      );
+    return this.http.get(`${this._API}delay/dinosaurs`).pipe(
+      catchError((err, caught) => this._onError(err, caught))
+    );
   }
 
   private _onError(err: HttpErrorResponse | any, caught) {
-    // This function is called with arrow syntax to preserve "this"
-    // in case it is needed for error handling in the future
     let errorMsg = 'Error: Unable to complete request.';
     if (err instanceof HttpErrorResponse) {
       errorMsg = err.message;

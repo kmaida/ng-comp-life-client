@@ -1,9 +1,15 @@
-import { Component, OnInit, ViewChildren, AfterViewInit, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  AfterViewInit,
+  QueryList
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { ApiService } from '../../api.service';
-import { IDinosaur } from '../../dinosaur.model';
+import { ApiService } from '../../core/api.service';
+import { IDinosaur } from '../../core/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -26,19 +32,32 @@ export class DinosComponent implements OnInit, AfterViewInit {
     private api: ApiService
   ) {
     this._setInitScrollId();
-    this.dinoList$ = api.getDinos$()
-      .pipe(
-        tap(
-          (res) => this.loading = false,
-          (err) => {
-            this.error = true;
-            this.loading = false;
-          }
-        )
-      );
+    this.dinoList$ = api.getDinos$().pipe(
+      tap(
+        (res) => this.loading = false,
+        (err) => {
+          this.error = true;
+          this.loading = false;
+        }
+      )
+    );
   }
 
   ngOnInit() {
+  }
+
+  private _setInitScrollId() {
+    this.hashSub = this.route.fragment.subscribe(
+      fragment => {
+        if (fragment && !this.ngForRendered) {
+          // Only check this if NgFor hasn't rendered yet.
+          // This means it's the initial load of the page.
+          // If fragment is found, set scrollId from
+          // pageload's hash; scroll takes place on AfterViewInit
+          this.scrollId = fragment;
+        }
+      }
+    );
   }
 
   ngAfterViewInit() {
@@ -52,20 +71,6 @@ export class DinosComponent implements OnInit, AfterViewInit {
           window.scrollTo(0, top);
         }
         this.initDinoLoopSub.unsubscribe();
-      }
-    );
-  }
-
-  private _setInitScrollId() {
-    this.hashSub = this.route.fragment.subscribe(
-      fragment => {
-        if (fragment && !this.ngForRendered) {
-          // Only check this if NgFor hasn't rendered yet.
-          // This means it's the initial load of the page.
-          // If fragment is found, set scrollId from
-          // pageload's hash; scroll takes place on AfterViewInit
-          this.scrollId = fragment;
-        }
       }
     );
   }

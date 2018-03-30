@@ -13,6 +13,9 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getDinos$(): Observable<IDinosaur[]> {
+    // We can change this endpoint to simulate a live environment
+    // dinosaurs (local)
+    // delay/dinosaurs (simulate live)
     return this.http.get(`${this._API}delay/dinosaurs`)
       .pipe(
         catchError((err, caught) => this._onError(err, caught))

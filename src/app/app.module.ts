@@ -11,6 +11,9 @@ import { ErrorComponent } from './core/error.component';
 
 import { DinosComponent } from './pages/dinos/dinos.component';
 import { HomeComponent } from './pages/home/home.component';
+import { StartComponent } from './pages/start/start.component';
+import { DinoComponent } from './core/dino/dino.component';
+import { AsyncComponent } from './pages/async/async.component';
 
 
 @NgModule({
@@ -19,7 +22,10 @@ import { HomeComponent } from './pages/home/home.component';
     DinosComponent,
     LoadingComponent,
     ErrorComponent,
-    HomeComponent
+    HomeComponent,
+    StartComponent,
+    DinoComponent,
+    AsyncComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<h1 class="text-center">Classic List</h1>
+<p class="text-center lead">
+  Classic list of data retrieved from an API with subscription, OnInit, and OnDestroy.
+</p>
+
+<app-loading *ngIf="loading"></app-loading>
+<app-error *ngIf="error"></app-error>
+
+<div *ngIf="dinoList">
+  <div *ngFor="let dino of dinoList" class="card my-2">
+    <div class="card-body">
+      <h5 class="card-title">{{ dino.name }}</h5>
+      <p class="card-text" [innerHTML]="dino.info"></p>
+    </div>
+  </div>
+</div>

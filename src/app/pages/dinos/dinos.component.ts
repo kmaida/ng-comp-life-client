@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ViewChildren,
   AfterViewInit,
   QueryList,
@@ -18,7 +17,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './dinos.component.html',
   styleUrls: ['./dinos.component.css']
 })
-export class DinosComponent implements OnInit, AfterViewInit {
+export class DinosComponent implements AfterViewInit {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<any>;
@@ -41,9 +40,6 @@ export class DinosComponent implements OnInit, AfterViewInit {
         }
       )
     );
-  }
-
-  ngOnInit() {
   }
 
   private _setInitScrollId() {

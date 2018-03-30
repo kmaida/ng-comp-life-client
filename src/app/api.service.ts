@@ -8,12 +8,12 @@ import { IDinosaur } from './dinosaur.model';
 
 @Injectable()
 export class ApiService {
-  private _API = 'http://dinoapi.kmaida.net/';
+  private _API = 'http://localhost:3005/api/';
 
   constructor(private http: HttpClient) { }
 
   getDinos$(): Observable<IDinosaur[]> {
-    return this.http.get(`${this._API}dinosaurs`)
+    return this.http.get(`${this._API}delay/dinosaurs`)
       .pipe(
         catchError((err, caught) => this._onError(err, caught))
       );

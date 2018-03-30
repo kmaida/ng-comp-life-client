@@ -13,11 +13,11 @@ import { IDinosaur } from '../../core/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-dinos',
-  templateUrl: './dinos.component.html',
-  styleUrls: ['./dinos.component.css']
+  selector: 'app-afterviewinit',
+  templateUrl: './afterviewinit.component.html',
+  styleUrls: ['./afterviewinit.component.css']
 })
-export class DinosComponent implements AfterViewInit {
+export class AfterviewinitComponent implements AfterViewInit {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<any>;

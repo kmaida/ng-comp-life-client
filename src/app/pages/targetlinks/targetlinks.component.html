@@ -1,0 +1,22 @@
+<h1 class="text-center">Adding Target Links</h1>
+<p class="text-center lead">
+  Trying to use target links doesn't work out of the box here
+</p>
+
+<ng-template #noDinos>
+  <app-loading *ngIf="loading"></app-loading>
+  <app-error *ngIf="error"></app-error>
+</ng-template>
+
+<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+  <div
+    *ngFor="let dino of dinoList"
+    id="{{dino.name | lowercase}}"
+    class="py-4 my-4">
+    <a
+      [routerLink]="['/targetlinks']"
+      fragment="{{dino.name | lowercase}}">
+      <h3>{{dino.name}}</h3>
+    </a>
+  </div>
+</div>

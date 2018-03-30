@@ -1,4 +1,4 @@
-<h1 class="text-center">Dinosaurs</h1>
+<h1 class="text-center">AfterViewInit</h1>
 <p class="text-center lead">
   Async Pipe with template reference variables, NgIfElse, and AfterViewInit
 </p>
@@ -15,9 +15,11 @@
       id="{{dino.name | lowercase}}"
       #dinoElement>
       <a
-        [routerLink]="['/final']"
+        [routerLink]="['/afterviewinit']"
         fragment="{{dino.name | lowercase}}"
-        (click)="scrollToAnchor(dinoElement)">{{dino.name}}</a>
+        (click)="scrollToAnchor(dinoElement)">
+        <h3>{{dino.name}}</h3>
+      </a>
     </li>
   </ul>
 </div>

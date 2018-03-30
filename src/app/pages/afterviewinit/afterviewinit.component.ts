@@ -3,7 +3,8 @@ import {
   ViewChildren,
   AfterViewInit,
   QueryList,
-  ElementRef
+  ElementRef,
+  OnDestroy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -17,7 +18,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './afterviewinit.component.html',
   styles: []
 })
-export class AfterviewinitComponent implements AfterViewInit {
+export class AfterviewinitComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<any>;
@@ -30,7 +31,7 @@ export class AfterviewinitComponent implements AfterViewInit {
     private route: ActivatedRoute,
     private api: ApiService
   ) {
-    this._setInitScrollId();
+    this._initHashSub();
     this.dinoList$ = api.getDinos$().pipe(
       tap(
         (res) => this.loading = false,
@@ -42,16 +43,14 @@ export class AfterviewinitComponent implements AfterViewInit {
     );
   }
 
-  private _setInitScrollId() {
+  private _initHashSub() {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
         if (fragment) {
-          // Only check this if NgFor hasn't rendered yet.
-          // This means it's the initial load of the page.
-          // If fragment is found, set scrollId from
-          // pageload's hash; initial scroll then
-          // takes place on AfterViewInit
           this.scrollId = fragment;
+          if (this.dinoList && this.dinoList.length) {
+            this._scrollToAnchor(this.dinoList);
+          }
         }
       }
     );
@@ -61,18 +60,22 @@ export class AfterviewinitComponent implements AfterViewInit {
     this.initDinoElementSub = this.dinoList.changes.subscribe(
       (changes: QueryList<ElementRef>) => {
         if (this.scrollId) {
-          const scrollElementRef = changes.find(
-            (el: ElementRef) => el.nativeElement.id === this.scrollId
-          );
-          this.scrollToAnchor(scrollElementRef.nativeElement);
+          this._scrollToAnchor(changes);
+          this.initDinoElementSub.unsubscribe();
         }
-        this.initDinoElementSub.unsubscribe();
       }
     );
   }
 
-  scrollToAnchor(element) {
-    const pos = element.offsetTop || document.body.clientTop || 0;
+  private _scrollToAnchor(queryList: QueryList<ElementRef>) {
+    const scrollElementRef = queryList.find(
+      (el: ElementRef) => el.nativeElement.id === this.scrollId
+    );
+    const pos = scrollElementRef.nativeElement.offsetTop || document.body.clientTop || 0;
     window.scrollTo(0, pos);
+  }
+
+  ngOnDestroy() {
+    this.hashSub.unsubscribe();
   }
 }

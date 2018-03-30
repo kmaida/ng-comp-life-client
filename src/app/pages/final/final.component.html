@@ -16,8 +16,7 @@
     <app-dino-content [dino]="dino">
       <a
         [routerLink]="['/final']"
-        fragment="{{dino.name | lowercase}}"
-        (click)="scrollToAnchor(dinoElement)">{{ dino.name }}</a>
+        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <p class="notes">
         {{ dino.name === 'Giganotosaurus' ? 'aka "Chickennuggetsaurus"': null }}
       </p>

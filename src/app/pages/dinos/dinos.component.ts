@@ -22,8 +22,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<any>;
-  initdinoElementSub: Subscription;
-  ngForRendered: boolean;
+  initDinoElementSub: Subscription;
   scrollId: string;
   loading = true;
   error: boolean;
@@ -50,11 +49,12 @@ export class DinosComponent implements OnInit, AfterViewInit {
   private _setInitScrollId() {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
-        if (fragment && !this.ngForRendered) {
+        if (fragment) {
           // Only check this if NgFor hasn't rendered yet.
           // This means it's the initial load of the page.
           // If fragment is found, set scrollId from
-          // pageload's hash; scroll takes place on AfterViewInit
+          // pageload's hash; initial scroll then
+          // takes place on AfterViewInit
           this.scrollId = fragment;
         }
       }
@@ -62,7 +62,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.initdinoElementSub = this.dinoList.changes.subscribe(
+    this.initDinoElementSub = this.dinoList.changes.subscribe(
       (changes: QueryList<any>) => {
         if (this.scrollId) {
           const scrollElementRef = changes.find(
@@ -70,7 +70,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
           );
           this.scrollToAnchor(scrollElementRef.nativeElement);
         }
-        this.initdinoElementSub.unsubscribe();
+        this.initDinoElementSub.unsubscribe();
       }
     );
   }

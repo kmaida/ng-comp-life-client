@@ -21,8 +21,8 @@ import { tap } from 'rxjs/operators';
 export class DinosComponent implements OnInit, AfterViewInit {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
-  @ViewChildren('dinoLoop') dinoList: QueryList<any>;
-  initDinoLoopSub: Subscription;
+  @ViewChildren('dinoElement') dinoList: QueryList<any>;
+  initdinoElementSub: Subscription;
   ngForRendered: boolean;
   scrollId: string;
   loading = true;
@@ -62,7 +62,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.initDinoLoopSub = this.dinoList.changes.subscribe(
+    this.initdinoElementSub = this.dinoList.changes.subscribe(
       (changes: QueryList<any>) => {
         if (this.scrollId) {
           const scrollElementRef = changes.find(
@@ -70,7 +70,7 @@ export class DinosComponent implements OnInit, AfterViewInit {
           );
           this.scrollToAnchor(scrollElementRef.nativeElement);
         }
-        this.initDinoLoopSub.unsubscribe();
+        this.initdinoElementSub.unsubscribe();
       }
     );
   }

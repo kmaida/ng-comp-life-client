@@ -16,14 +16,12 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-final',
   templateUrl: './final.component.html',
-  styles: [`
-    :host ::ng-deep .notes { color: red; }
-  `]
+  styles: [`:host ::ng-deep .notes { color: red; }`]
 })
 export class FinalComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
-  @ViewChildren('dinoElement') dinoList: QueryList<any>;
+  @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
   initDinoElementSub: Subscription;
   scrollId: string;
   loading = true;
@@ -33,7 +31,7 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private api: ApiService
   ) {
-    this._initHashSub();
+    this._subscribeToHashChange();
     this.dinoList$ = api.getDinos$().pipe(
       tap(
         (res) => this.loading = false,
@@ -45,7 +43,7 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  private _initHashSub() {
+  private _subscribeToHashChange() {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
         if (fragment) {
@@ -71,10 +69,12 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
 
   private _scrollToAnchor(queryList: QueryList<ElementRef>) {
     const scrollElementRef = queryList.find(
-      (el: ElementRef) => el.nativeElement.id === this.scrollId
+      (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : null
     );
-    const pos = scrollElementRef.nativeElement.offsetTop || document.body.clientTop || 0;
-    window.scrollTo(0, pos);
+    if (scrollElementRef) {
+      const pos = scrollElementRef.nativeElement.offsetTop;
+      window.scrollTo(0, pos);
+    }
   }
 
   ngOnDestroy() {

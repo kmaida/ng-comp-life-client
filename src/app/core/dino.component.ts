@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IDinosaur } from '../dinosaur.model';
+import { IDinosaur } from './dinosaur.model';
 
 @Component({
   selector: 'app-dino',

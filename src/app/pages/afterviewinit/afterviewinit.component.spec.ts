@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AfterviewinitComponent } from './afterviewinit.component';
+import { LoadingComponent } from '../../core/loading.component';
+import { ErrorComponent } from '../../core/error.component';
 
 describe('AfterviewinitComponent', () => {
   let component: AfterviewinitComponent;
@@ -8,7 +10,7 @@ describe('AfterviewinitComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AfterviewinitComponent ]
+      declarations: [ AfterviewinitComponent, LoadingComponent, ErrorComponent ]
     })
     .compileComponents();
   }));

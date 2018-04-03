@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FinalComponent } from './final.component';
+import { LoadingComponent } from '../../core/loading.component';
+import { ErrorComponent } from '../../core/error.component';
+import { DinoContentComponent } from './dino-content.component';
 
 describe('FinalComponent', () => {
   let component: FinalComponent;
@@ -8,7 +11,7 @@ describe('FinalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FinalComponent ]
+      declarations: [ FinalComponent, LoadingComponent, ErrorComponent, DinoContentComponent ]
     })
     .compileComponents();
   }));

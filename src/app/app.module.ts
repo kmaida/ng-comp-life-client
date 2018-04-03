@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ApiService } from './core/api.service';
 import { LoadingComponent } from './core/loading.component';
 import { ErrorComponent } from './core/error.component';
-import { DinoComponent } from './core/dino/dino.component';
+import { DinoComponent } from './core/dino.component';
 
 import { AfterviewinitComponent } from './pages/afterviewinit/afterviewinit.component';
 import { HomeComponent } from './pages/home/home.component';

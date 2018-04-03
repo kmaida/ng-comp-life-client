@@ -43,7 +43,7 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  private _subscribeToHashChange() {
+  private _subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
         if (fragment) {
@@ -67,9 +67,9 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  private _scrollToAnchor(queryList: QueryList<ElementRef>) {
+  private _scrollToAnchor(queryList: QueryList<ElementRef>): void {
     const scrollElementRef = queryList.find(
-      (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : null
+      (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : false
     );
     if (scrollElementRef) {
       const pos = scrollElementRef.nativeElement.offsetTop;

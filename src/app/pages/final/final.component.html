@@ -13,12 +13,12 @@
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
     #dinoElement>
-    <app-dino-content [dino]="dino">
-      <a
-        [routerLink]="['/final']"
-        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
-      <p class="notes">
-        {{ dino.name === 'Giganotosaurus' ? 'aka "Chickennuggetsaurus"': null }}
+    <app-dino-content [dino]="dino" path="final">
+      <span class="favorite" *ngIf="dino.name === 'Parasaurolophus'">
+        🌟
+      </span>
+      <p class="notes" *ngIf="dino.name === 'Giganotosaurus'">
+        aka "Chickennuggetsaurus"
       </p>
     </app-dino-content>
   </div>

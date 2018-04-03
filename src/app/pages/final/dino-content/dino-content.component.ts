@@ -8,10 +8,13 @@ import { IDinosaur } from '../../../shared/dinosaur.model';
 })
 export class DinoContentComponent implements OnInit {
   @Input() dino: IDinosaur;
+  @Input() path: string;
+  routerLinkArr: string[];
 
   constructor() { }
 
   ngOnInit() {
+    this.routerLinkArr = [`/${this.path}`];
   }
 
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from '../../core/api.service';
+import { ApiService } from '../../shared/api.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { IDinosaur } from './../../core/dinosaur.model';
+import { IDinosaur } from './../../shared/dinosaur.model';
 
 @Component({
   selector: 'app-start',
@@ -18,7 +18,7 @@ export class StartComponent implements OnInit, OnDestroy {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.dinoListSub = this.api.getLocalDinos$().subscribe(
+    this.dinoListSub = this.api.getDinos$().subscribe(
       (res) => {
         this.dinoList = res;
         this.loading = false;

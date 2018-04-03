@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../core/api.service';
+import { ApiService } from '../../shared/api.service';
 import { Observable } from 'rxjs/Observable';
-import { IDinosaur } from './../../core/dinosaur.model';
+import { IDinosaur } from './../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,7 @@ export class AsyncComponent implements OnInit {
   error: boolean;
 
   constructor(private api: ApiService) {
-    this.dinoList$ = this.api.getLocalDinos$().pipe(
+    this.dinoList$ = this.api.getDinos$().pipe(
       tap(
         (res) => this.loading = false,
         (err) => {

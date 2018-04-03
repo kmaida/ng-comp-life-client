@@ -12,12 +12,6 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getLocalDinos$(): Observable<IDinosaur[]> {
-    return this.http.get(`${this._API}dinosaurs`).pipe(
-      catchError((err, caught) => this._onError(err, caught))
-    );
-  }
-
   getDinos$(): Observable<IDinosaur[]> {
     // Simulates live environment by using the delayed endpoint
     return this.http.get(`${this._API}delay/dinosaurs`).pipe(

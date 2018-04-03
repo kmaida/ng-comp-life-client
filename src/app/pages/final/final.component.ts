@@ -9,8 +9,8 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { ApiService } from '../../core/api.service';
-import { IDinosaur } from '../../core/dinosaur.model';
+import { ApiService } from '../../shared/api.service';
+import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({

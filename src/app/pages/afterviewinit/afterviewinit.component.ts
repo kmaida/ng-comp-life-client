@@ -46,11 +46,9 @@ export class AfterviewinitComponent implements AfterViewInit, OnDestroy {
   private _subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
-        if (fragment) {
-          this.scrollId = fragment;
-          if (this.dinoList && this.dinoList.length) {
-            this._scrollToAnchor(this.dinoList);
-          }
+        this.scrollId = fragment;
+        if (this.dinoList && this.dinoList.length) {
+          this._scrollToAnchor(this.dinoList);
         }
       }
     );

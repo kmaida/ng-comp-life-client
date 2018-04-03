@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AfterviewinitComponent } from './dinos.component';
+import { AfterviewinitComponent } from './afterviewinit.component';
 
 describe('AfterviewinitComponent', () => {
   let component: AfterviewinitComponent;

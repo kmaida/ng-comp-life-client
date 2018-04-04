@@ -1,4 +1,4 @@
-<h1 class="text-center">Dinosaurs</h1>
+<h1 class="text-center">Multiple Content Projection</h1>
 <p class="text-center lead">
   Async Pipe with template reference variables, NgIfElse, AfterViewInit, and multiple Content Projection
 </p>
@@ -8,12 +8,27 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
+<h2 class="text-center">Featured</h2>
+<app-dino-content [dino]="featuredDino">
+  <a href="http://www.jpost.com/Israel-News/Israeli-geologists-find-unprecedented-85-million-year-old-reptile-remains-390633">
+    {{ featuredDino.name }}
+  </a>
+  <span class="favorite">🌊</span>
+  <p class="notes">
+    An 85-million-year-old Elasmosaurus fossil was discovered in Israel.
+  </p>
+</app-dino-content>
+
+<h2 class="text-center">Dinosaurs</h2>
 <div *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
     #dinoElement>
-    <app-dino-content [dino]="dino" path="final">
+    <app-dino-content [dino]="dino">
+      <a
+        [routerLink]="['/final']"
+        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="favorite" *ngIf="dino.name === 'Parasaurolophus'">
         🌟
       </span>

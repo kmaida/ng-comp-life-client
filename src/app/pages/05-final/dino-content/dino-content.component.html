@@ -1,9 +1,7 @@
 <div class="card my-2">
   <div class="card-body">
     <h5 class="card-title">
-      <a
-        [routerLink]="routerLinkArr"
-        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
+      <ng-content select="a"></ng-content>
       <ng-content select=".favorite"></ng-content>
     </h5>
     <div class="card-text">

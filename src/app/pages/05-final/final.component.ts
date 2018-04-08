@@ -4,6 +4,7 @@ import {
   AfterViewInit,
   QueryList,
   ElementRef,
+  ChangeDetectionStrategy,
   OnDestroy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,8 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-final',
   templateUrl: './final.component.html',
-  styles: [`:host ::ng-deep .notes { color: red; }`]
+  styles: [`:host ::ng-deep .notes { color: red; }`],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FinalComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
@@ -83,6 +85,15 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
       const pos = scrollElementRef.nativeElement.offsetTop;
       window.scrollTo(0, pos);
     }
+  }
+
+  onFavEvent(name: string) {
+    this.api.favDino$(name).subscribe(
+      res => {
+        // @TODO: update so that onPush does something here
+        console.log(res);
+      }
+    );
   }
 
   ngOnDestroy() {

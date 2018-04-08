@@ -7,4 +7,5 @@ export interface IDinosaur {
   period: string;
   mya: string;
   info: string;
+  favorite?: boolean;
 }

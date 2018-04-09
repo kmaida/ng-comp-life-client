@@ -9,8 +9,8 @@ import { IDinosaur } from './dinosaur.model';
 @Injectable()
 export class ApiService {
   private _API = 'http://localhost:3005/api';
-  private _dinoList: IDinosaur[];
-  dinos$ = new BehaviorSubject<IDinosaur[]>([]);
+  private _dinoList: any;
+  dinos$ = new BehaviorSubject<IDinosaur[]>(null);
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +26,12 @@ export class ApiService {
   getDinos$(): Observable<IDinosaur[]> {
     // Simulates live environment by using the delayed endpoint
     return this.http.get(`${this._API}/delay/dinosaurs`).pipe(
+      tap(
+        (res) => {
+          this._dinoList = res;
+          this.dinos$.next([...this._dinoList]);
+        }
+      ),
       catchError((err, caught) => this._onError(err, caught))
     );
   }
@@ -34,9 +40,14 @@ export class ApiService {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
       tap(
         res => {
-          const index = this._dinoList.findIndex((item) => name === item.name);
-          const newState = [...this._dinoList];
-          Object.assign({}, newState[index], res);
+          const state = [...this._dinoList];
+          const index = state.findIndex((item) => name === item.name);
+          const newState = state.map((dino, i) => {
+            if (i === index) {
+              dino.favorite = true;
+            }
+            return dino;
+          });
           this.dinos$.next(newState);
         }
       ),

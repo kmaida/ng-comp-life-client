@@ -27,10 +27,8 @@ export class DinoContentOnpushComponent implements OnInit {
   favDinosaur() {
     this.fav.emit(this.dino.name);
     const oldDino = this.dino;
-    this.dino = Object.assign({}, oldDino, {favorite: true});
+    this.dino = Object.assign({}, oldDino, { favorite: true });
     this.cd.markForCheck();
-    // This works locally, but doesn't bubble up to affect the projected content
-    // Something is missing in async; maybe DM Minko Gechev in Angular team Slack
   }
 
 }

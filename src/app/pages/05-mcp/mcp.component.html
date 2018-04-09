@@ -27,7 +27,7 @@
     #dinoElement>
     <app-dino-content [dino]="dino" (fav)="onFavEvent($event)">
       <a
-        [routerLink]="['/final']"
+        [routerLink]="['/mcp']"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.name === 'Parasaurolophus'">
         🌟

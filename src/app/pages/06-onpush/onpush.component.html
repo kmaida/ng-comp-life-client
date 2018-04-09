@@ -3,10 +3,6 @@
   Async Pipe with template reference variables, NgIfElse, AfterViewInit, multiple Content Projection, and OnPush change detection
 </p>
 
-<ng-template #noDinos>
-  <app-error *ngIf="error"></app-error>
-</ng-template>
-
 <h2 class="text-center">Featured</h2>
 <app-dino-content [dino]="featuredDino">
   <a href="http://www.jpost.com/Israel-News/Israeli-geologists-find-unprecedented-85-million-year-old-reptile-remains-390633">
@@ -19,15 +15,16 @@
 </app-dino-content>
 
 <h2 class="text-center pt-2">Dinosaurs</h2>
-<div *ngIf="dinoList$ | async as dinoList; else noDinos">
-  <app-loading *ngIf="loading"></app-loading>
+<!-- <app-error *ngIf="error"></app-error>
+<app-loading *ngIf="loading"></app-loading> -->
+<!-- <div *ngIf="dinoList$ | async as dinoList"> -->
   <div
-    *ngFor="let dino of dinoList"
+    *ngFor="let dino of dinoList$ | async"
     id="{{dino.name | lowercase}}"
     #dinoElement>
     <app-dino-content-onpush [dino]="dino" (fav)="onFavEvent($event)">
       <a
-        [routerLink]="['/final']"
+        [routerLink]="['/onpush']"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.favorite">
         🌟
@@ -37,4 +34,4 @@
       </p>
     </app-dino-content-onpush>
   </div>
-</div>
+<!-- </div> -->

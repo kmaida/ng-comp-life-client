@@ -26,6 +26,7 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
   scrollId: string;
   loading = true;
   error: boolean;
+  favSub: Subscription;
   featuredDino: IDinosaur = {
     name: 'Elasmosaurus',
     pronunciation: 'ee-LAZ-mo-sore-us',
@@ -44,11 +45,7 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
     this._subscribeToHashChange();
     this.dinoList$ = api.dinos$.pipe(
       tap(
-        (res) => {
-          if (res.length) {
-            this.loading = false;
-          }
-        },
+        (res) => this.loading = false,
         (err) => {
           this.error = true;
           this.loading = false;
@@ -90,15 +87,13 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
   }
 
   onFavEvent(name: string) {
-    this.api.favDino$(name).subscribe(
-      res => {
-        // @TODO: update so that onPush does something here
-        console.log(res);
-      }
-    );
+    this.favSub = this.api.favDino$(name).subscribe();
   }
 
   ngOnDestroy() {
     this.hashSub.unsubscribe();
+    if (this.favSub) {
+      this.favSub.unsubscribe();
+    }
   }
 }

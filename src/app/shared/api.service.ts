@@ -9,8 +9,8 @@ import { IDinosaur } from './dinosaur.model';
 @Injectable()
 export class ApiService {
   private _API = 'http://localhost:3005/api';
-  private _dinoList: any;
-  dinos$ = new BehaviorSubject<IDinosaur[]>(this._dinoList);
+  private _state: any;
+  dinos$ = new BehaviorSubject<IDinosaur[]>(this._state);
 
   constructor(private http: HttpClient) { }
 
@@ -18,8 +18,8 @@ export class ApiService {
     return this.http.get(`${this._API}/delay/dinosaurs`).pipe(
       tap(
         res => {
-          this._dinoList = res;
-          this.dinos$.next([...this._dinoList]);
+          this._state = res;
+          this.dinos$.next([...this._state]);
         }
       ),
       catchError((err, caught) => this._onError(err, caught))
@@ -30,7 +30,7 @@ export class ApiService {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
       tap(
         res => {
-          const state = [...this._dinoList];
+          const state = [...this._state];
           const index = state.findIndex(d => name === d.name);
           const newState = state.map((dino, i) => {
             if (i === index) {

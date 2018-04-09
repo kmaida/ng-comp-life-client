@@ -42,10 +42,12 @@ export class McpComponent implements AfterViewInit, OnDestroy {
     private api: ApiService
   ) {
     this._subscribeToHashChange();
-    this.dinoList$ = api.getDinos$().pipe(
+    this.dinoList$ = api.dinos$.pipe(
       tap(
-        (res) => this.loading = false,
-        (err) => {
+        res => {
+          if (res) { this.loading = false; }
+        },
+        err => {
           this.error = true;
           this.loading = false;
         }

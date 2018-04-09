@@ -15,10 +15,14 @@ export class AsyncComponent implements OnInit {
   error: boolean;
 
   constructor(private api: ApiService) {
-    this.dinoList$ = this.api.getDinos$().pipe(
+    this.dinoList$ = this.api.dinos$.pipe(
       tap(
-        (res) => this.loading = false,
-        (err) => {
+        res => {
+          if (res) {
+            this.loading = false;
+          }
+        },
+        err => {
           this.loading = false;
           this.error = true;
         }

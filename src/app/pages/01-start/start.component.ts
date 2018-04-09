@@ -18,12 +18,14 @@ export class StartComponent implements OnInit, OnDestroy {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.dinoListSub = this.api.getDinos$().subscribe(
-      (res) => {
-        this.dinoList = res;
-        this.loading = false;
+    this.dinoListSub = this.api.dinos$.subscribe(
+      res => {
+        if (res) {
+          this.dinoList = res;
+          this.loading = false;
+        }
       },
-      (err) => {
+      err => {
         this.loading = false;
         this.error = true;
       }

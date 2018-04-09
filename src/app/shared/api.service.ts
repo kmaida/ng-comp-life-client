@@ -27,43 +27,45 @@ export class ApiService {
   }
 
   favDino$(name: string): Observable<IDinosaur> {
+    // Perform optimistic updates by updating state first,
+    // then returning the HTTP request observable
+    const state = [...this._state];
+    const index = state.findIndex(d => name === d.name);
+    const newState = state.map((dino, i) => {
+      if (i === index) {
+        // This does not update the reference,
+        // it just changes properties. This will
+        // not trigger change detection with OnPush.
+        dino.favorite = true;
+      }
+      return dino;
+    });
+    this.dinos$.next(newState);
+
+    // Make POST request to API
+    // Optimistic updates assume this succeeds
     return this.http.post(`${this._API}/fav`, { name }).pipe(
-      tap(
-        res => {
-          const state = [...this._state];
-          const index = state.findIndex(d => name === d.name);
-          const newState = state.map((dino, i) => {
-            if (i === index) {
-              // This does not update the reference,
-              // it just changes properties. This will
-              // not trigger change detection with OnPush.
-              dino.favorite = true;
-            }
-            return dino;
-          });
-          this.dinos$.next(newState);
-        }
-      ),
       catchError((err, caught) => this._onError(err, caught))
     );
   }
 
   favDinoOnPush$(name: string): Observable<IDinosaur> {
-    // In this case, we update the reference to the updated dino
+    // Perform optimistic updates by updating state first,
+    // then returning the HTTP request observable
+    const state = [...this._state];
+    const index = state.findIndex(d => name === d.name);
+    const newState = state.map((dino, i) => {
+      if (i === index) {
+        // In this case, we update the reference to the updated dino
+        return Object.assign({}, dino, { favorite: true });
+      }
+      return dino;
+    });
+    this.dinos$.next(newState);
+
+    // Make POST request to API
+    // Optimistic updates assume this succeeds
     return this.http.post(`${this._API}/fav`, { name }).pipe(
-      tap(
-        res => {
-          const state = [...this._state];
-          const index = state.findIndex(d => name === d.name);
-          const newState = state.map((dino, i) => {
-            if (i === index) {
-              return Object.assign({}, dino, { favorite: true });
-            }
-            return dino;
-          });
-          this.dinos$.next(newState);
-        }
-      ),
       catchError((err, caught) => this._onError(err, caught))
     );
   }

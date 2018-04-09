@@ -4,7 +4,6 @@ import {
   AfterViewInit,
   QueryList,
   ElementRef,
-  ChangeDetectionStrategy,
   OnDestroy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,12 +14,11 @@ import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-final',
-  templateUrl: './final.component.html',
-  styles: [`:host ::ng-deep .notes { color: red; }`],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-mcp',
+  templateUrl: './mcp.component.html',
+  styles: [`:host ::ng-deep .notes { color: red; }`]
 })
-export class FinalComponent implements AfterViewInit, OnDestroy {
+export class McpComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
@@ -85,15 +83,6 @@ export class FinalComponent implements AfterViewInit, OnDestroy {
       const pos = scrollElementRef.nativeElement.offsetTop;
       window.scrollTo(0, pos);
     }
-  }
-
-  onFavEvent(name: string) {
-    this.api.favDino$(name).subscribe(
-      res => {
-        // @TODO: update so that onPush does something here
-        console.log(res);
-      }
-    );
   }
 
   ngOnDestroy() {

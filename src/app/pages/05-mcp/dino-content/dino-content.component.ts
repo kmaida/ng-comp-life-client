@@ -1,12 +1,9 @@
 import {
   Component,
   OnInit,
-  Input,
-  Output,
-  EventEmitter
+  Input
 } from '@angular/core';
 import { IDinosaur } from '../../../shared/dinosaur.model';
-import { ApiService } from '../../../shared/api.service';
 
 @Component({
   selector: 'app-dino-content',
@@ -15,15 +12,10 @@ import { ApiService } from '../../../shared/api.service';
 })
 export class DinoContentComponent implements OnInit {
   @Input() dino: IDinosaur;
-  @Output() fav = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  favDinosaur() {
-    this.fav.emit(this.dino.name);
   }
 
 }

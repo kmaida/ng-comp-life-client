@@ -6,7 +6,8 @@ import { StartComponent } from './pages/01-start/start.component';
 import { AsyncComponent } from './pages/02-async/async.component';
 import { TargetlinksComponent } from './pages/03-targetlinks/targetlinks.component';
 import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.component';
-import { FinalComponent } from './pages/05-final/final.component';
+import { McpComponent } from './pages/05-mcp/mcp.component';
+import { OnpushComponent } from './pages/06-onpush/onpush.component';
 
 const routes: Routes = [
   {
@@ -30,8 +31,12 @@ const routes: Routes = [
     component: AfterviewinitComponent
   },
   {
-    path: 'final',
-    component: FinalComponent
+    path: 'mcp',
+    component: McpComponent
+  },
+  {
+    path: 'onpush',
+    component: OnpushComponent
   }
 ];
 

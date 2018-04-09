@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './shared/api.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
+  constructor(private api: ApiService) {
+    api.getInitialState();
+  }
 }

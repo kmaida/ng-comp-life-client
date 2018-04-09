@@ -16,7 +16,8 @@ import { IDinosaur } from '../../../shared/dinosaur.model';
 })
 export class DinoContentOnpushComponent implements OnInit {
   @Input() dino: IDinosaur;
-  @Output() fav = new EventEmitter<string>();
+  @Input() showFavBtn: boolean;
+  @Output() favBtnClicked = new EventEmitter<string>();
 
   constructor() { }
 
@@ -24,7 +25,7 @@ export class DinoContentOnpushComponent implements OnInit {
   }
 
   favDinosaur() {
-    this.fav.emit(this.dino.name);
+    this.favBtnClicked.emit(this.dino.name);
     const oldDino = this.dino;
     this.dino = Object.assign({}, oldDino, { favorite: true });
   }

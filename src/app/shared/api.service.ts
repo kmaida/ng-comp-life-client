@@ -14,20 +14,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getInitialState() {
-    this.getDinos$().subscribe(
-      (res) => {
-        this._dinoList = res;
-        this.dinos$.next([...this._dinoList]);
-      }
-    );
-  }
-
   getDinos$(): Observable<IDinosaur[]> {
-    // Simulates live environment by using the delayed endpoint
     return this.http.get(`${this._API}/delay/dinosaurs`).pipe(
       tap(
-        (res) => {
+        res => {
           this._dinoList = res;
           this.dinos$.next([...this._dinoList]);
         }
@@ -41,7 +31,7 @@ export class ApiService {
       tap(
         res => {
           const state = [...this._dinoList];
-          const index = state.findIndex((item) => name === item.name);
+          const index = state.findIndex(d => name === d.name);
           const newState = state.map((dino, i) => {
             if (i === index) {
               dino.favorite = true;

@@ -25,16 +25,19 @@
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
     #dinoElement>
-    <app-dino-content-onpush [dino]="dino" (fav)="onFavEvent($event)">
+    <app-dino-content-onpush
+      [dino]="dino"
+      [showFavBtn]="true"
+      (favBtnClicked)="onFavEvent($event)">
       <a
         [routerLink]="['/onpush']"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.favorite">
         🌟
       </span>
-      <p class="notes" *ngIf="dino.name === 'Giganotosaurus'">
+      <p *ngIf="dino.name === 'Giganotosaurus'">
         aka "Chickennuggetsaurus"
       </p>
     </app-dino-content-onpush>
   </div>
-<!-- </div> -->
+</div>

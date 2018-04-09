@@ -8,6 +8,6 @@ import { ApiService } from './shared/api.service';
 })
 export class AppComponent {
   constructor(private api: ApiService) {
-    api.getInitialState();
+    api.getDinos$().subscribe();
   }
 }

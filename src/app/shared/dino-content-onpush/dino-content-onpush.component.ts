@@ -6,7 +6,7 @@ import {
   EventEmitter,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { IDinosaur } from '../../../shared/dinosaur.model';
+import { IDinosaur } from './../dinosaur.model';
 
 @Component({
   selector: 'app-dino-content-onpush',
@@ -26,8 +26,6 @@ export class DinoContentOnpushComponent implements OnInit {
 
   favDinosaur() {
     this.favBtnClicked.emit(this.dino.name);
-    const oldDino = this.dino;
-    this.dino = Object.assign({}, oldDino, { favorite: true });
   }
 
 }

@@ -14,11 +14,11 @@ import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-onpush',
-  templateUrl: './onpush.component.html',
+  selector: 'app-onpush-works',
+  templateUrl: './onpush-works.component.html',
   styles: [`:host ::ng-deep .notes { color: red; }`]
 })
-export class OnpushComponent implements AfterViewInit, OnDestroy {
+export class OnpushWorksComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
@@ -89,9 +89,8 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
   }
 
   onFavEvent(name: string) {
-    // This one doesn't update references
-    // so OnPush should fail here
-    this.favSub = this.api.favDino$(name).subscribe();
+    // We're now using an API call that updates references
+    this.favSub = this.api.favDinoOnPush$(name).subscribe();
   }
 
   ngOnDestroy() {

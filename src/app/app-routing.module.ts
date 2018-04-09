@@ -8,6 +8,7 @@ import { TargetlinksComponent } from './pages/03-targetlinks/targetlinks.compone
 import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.component';
 import { McpComponent } from './pages/05-mcp/mcp.component';
 import { OnpushComponent } from './pages/06-onpush/onpush.component';
+import { OnpushWorksComponent } from './pages/07-onpush-works/onpush-works.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'onpush',
     component: OnpushComponent
+  },
+  {
+    path: 'onpush-works',
+    component: OnpushWorksComponent
   }
 ];
 

@@ -15,7 +15,7 @@ import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.c
 import { McpComponent } from './pages/05-mcp/mcp.component';
 import { DinoContentComponent } from './pages/05-mcp/dino-content/dino-content.component';
 import { OnpushComponent } from './pages/06-onpush/onpush.component';
-import { DinoContentOnpushComponent } from './pages/06-onpush/dino-content-onpush/dino-content-onpush.component';
+import { OnpushWorksComponent } from './pages/07-onpush-works/onpush-works.component';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { DinoContentOnpushComponent } from './pages/06-onpush/dino-content-onpus
     TargetlinksComponent,
     DinoContentComponent,
     OnpushComponent,
-    DinoContentOnpushComponent
+    OnpushWorksComponent
   ],
   imports: [
     BrowserModule,

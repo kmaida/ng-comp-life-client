@@ -4,6 +4,7 @@ import { LoadingComponent } from './loading.component';
 import { ErrorComponent } from './error.component';
 import { DinoComponent } from './dino.component';
 import { ApiService } from './api.service';
+import { DinoContentOnpushComponent } from './dino-content-onpush/dino-content-onpush.component';
 
 @NgModule({
   imports: [
@@ -12,12 +13,14 @@ import { ApiService } from './api.service';
   declarations: [
     LoadingComponent,
     ErrorComponent,
-    DinoComponent
+    DinoComponent,
+    DinoContentOnpushComponent
   ],
   exports: [
     LoadingComponent,
     ErrorComponent,
-    DinoComponent
+    DinoComponent,
+    DinoContentOnpushComponent
   ],
   providers: [
     ApiService

@@ -41,6 +41,7 @@ export class ApiService {
             }
             return dino;
           });
+          this._state = newState;
           this.dinos$.next(newState);
         }
       ),
@@ -57,11 +58,14 @@ export class ApiService {
           const index = state.findIndex(d => name === d.name);
           const newState = state.map((dino, i) => {
             if (i === index) {
+              // Reference has changed for the updated dino;
+              // Change detection will run for the updated dino
               return Object.assign({}, dino, { favorite: true });
             }
             return dino;
           });
-          this.dinos$.next(newState);
+          this._state = newState;
+          this.dinos$.next(this._state);
         }
       ),
       catchError((err, caught) => this._onError(err, caught))

@@ -3,10 +3,6 @@
     <h5 class="card-title">
       <ng-content select="a"></ng-content>
       <ng-content select=".icon"></ng-content>
-      <button
-        *ngIf="!dino.favorite"
-        class="btn btn-sm btn-outline-success"
-        (click)="favDinosaur()">+Fav</button>
     </h5>
     <div class="card-text">
       <ng-content select=".notes"></ng-content>
@@ -20,5 +16,9 @@
       </ul>
     </div>
     <p class="card-text lead" [innerHTML]="dino.info"></p>
+    <button
+      *ngIf="!dino.favorite"
+      class="btn btn-sm btn-outline-success"
+      (click)="favDinosaur()">+Fav</button>
   </div>
 </div>

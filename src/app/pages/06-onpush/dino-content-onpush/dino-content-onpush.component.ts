@@ -4,8 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { IDinosaur } from '../../../shared/dinosaur.model';
 
@@ -19,7 +18,7 @@ export class DinoContentOnpushComponent implements OnInit {
   @Input() dino: IDinosaur;
   @Output() fav = new EventEmitter<string>();
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -28,7 +27,6 @@ export class DinoContentOnpushComponent implements OnInit {
     this.fav.emit(this.dino.name);
     const oldDino = this.dino;
     this.dino = Object.assign({}, oldDino, { favorite: true });
-    this.cd.markForCheck();
   }
 
 }

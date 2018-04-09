@@ -19,7 +19,7 @@ export class DinoContentOnpushComponent implements OnInit {
   @Input() dino: IDinosaur;
   @Output() fav = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
   }
@@ -28,7 +28,9 @@ export class DinoContentOnpushComponent implements OnInit {
     this.fav.emit(this.dino.name);
     const oldDino = this.dino;
     this.dino = Object.assign({}, oldDino, {favorite: true});
+    this.cd.markForCheck();
     // This works locally, but doesn't bubble up to affect the projected content
+    // Something is missing in async; maybe DM Minko Gechev in Angular team Slack
   }
 
 }

@@ -45,7 +45,11 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
     this._subscribeToHashChange();
     this.dinoList$ = api.dinos$.pipe(
       tap(
-        (res) => this.loading = false,
+        (res) => {
+          if (res) {
+            this.loading = false;
+          }
+        },
         (err) => {
           this.error = true;
           this.loading = false;

@@ -4,7 +4,7 @@
 </p>
 
 <h2 class="text-center">Featured</h2>
-<app-dino-content [dino]="featuredDino">
+<app-dino-content-onpush [dino]="featuredDino">
   <a href="http://www.jpost.com/Israel-News/Israeli-geologists-find-unprecedented-85-million-year-old-reptile-remains-390633">
     {{ featuredDino.name }}
   </a>
@@ -12,14 +12,17 @@
   <p class="notes">
     An 85-million-year-old Elasmosaurus fossil was discovered in Israel.
   </p>
-</app-dino-content>
+</app-dino-content-onpush>
 
 <h2 class="text-center pt-2">Dinosaurs</h2>
-<!-- <app-error *ngIf="error"></app-error>
-<app-loading *ngIf="loading"></app-loading> -->
-<!-- <div *ngIf="dinoList$ | async as dinoList"> -->
+<ng-template #noDinos>
+  <app-error *ngIf="error"></app-error>
+  <app-loading *ngIf="loading"></app-loading>
+</ng-template>
+
+<div *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
-    *ngFor="let dino of dinoList$ | async"
+    *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
     #dinoElement>
     <app-dino-content-onpush [dino]="dino" (fav)="onFavEvent($event)">

@@ -10,7 +10,7 @@ import { IDinosaur } from './dinosaur.model';
 export class ApiService {
   private _API = 'http://localhost:3005/api';
   private _dinoList: any;
-  dinos$ = new BehaviorSubject<IDinosaur[]>(null);
+  dinos$ = new BehaviorSubject<IDinosaur[]>(this._dinoList);
 
   constructor(private http: HttpClient) { }
 

@@ -40,6 +40,8 @@ export class OnpushRefsComponent implements OnInit, OnDestroy {
       dino => {
         this.dino = dino;
         this.loading = false;
+        // Freeze the dino so we can't mutate it
+        Object.freeze(this.dino);
       },
       err => {
         this.loading = false;
@@ -50,7 +52,9 @@ export class OnpushRefsComponent implements OnInit, OnDestroy {
   }
 
   submitForm() {
-    // Update this.dino reference
+    // Change this.dino reference
+    // We froze this.dino so we cannot mutate it,
+    // but we can update the reference to a new object
     this.dino = Object.assign({}, this.dino, this.formData);
     this.resetForm();
   }

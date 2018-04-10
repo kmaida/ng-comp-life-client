@@ -3,13 +3,9 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
-import { tap, catchError } from 'rxjs/operators';
-import { _throw } from 'rxjs/observable/throw';
 
 class DinoForm {
   constructor(

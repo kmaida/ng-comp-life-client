@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TargetlinksComponent } from './targetlinks.component';
-import { LoadingComponent } from '../../core/loading.component';
-import { ErrorComponent } from '../../core/error.component';
 
 describe('TargetlinksComponent', () => {
   let component: TargetlinksComponent;
@@ -10,7 +8,7 @@ describe('TargetlinksComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TargetlinksComponent, LoadingComponent, ErrorComponent ]
+      declarations: [ TargetlinksComponent ]
     })
     .compileComponents();
   }));

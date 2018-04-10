@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartComponent } from './start.component';
+import { DinoContentFavComponent } from './dino-content-fav.component';
 
-describe('StartComponent', () => {
-  let component: StartComponent;
-  let fixture: ComponentFixture<StartComponent>;
+describe('DinoContentFavComponent', () => {
+  let component: DinoContentFavComponent;
+  let fixture: ComponentFixture<DinoContentFavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartComponent ]
+      declarations: [ DinoContentFavComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StartComponent);
+    fixture = TestBed.createComponent(DinoContentFavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

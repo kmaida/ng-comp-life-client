@@ -4,19 +4,19 @@ import {
   Input,
   ChangeDetectionStrategy,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  DoCheck
 } from '@angular/core';
-import { IDinosaur } from './../dinosaur.model';
+import { IDinosaur } from './../../../shared/dinosaur.model';
 
 @Component({
-  selector: 'app-dino-content-onpush',
-  templateUrl: 'dino-content-onpush.component.html',
+  selector: 'app-dino-content-docheck',
+  templateUrl: 'dino-content-docheck.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DinoContentOnpushComponent implements OnChanges, OnInit {
+export class DinoContentDocheckComponent implements OnChanges, OnInit, DoCheck {
   @Input() dino: IDinosaur;
-  @Input() logDoCheck: boolean;
 
   constructor() { }
 
@@ -32,7 +32,7 @@ export class DinoContentOnpushComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    // This happens after the first ngOnChanges
+    // This happens AFTER ngOnChanges
     console.log('ngOnInit');
   }
 
@@ -51,6 +51,11 @@ export class DinoContentOnpushComponent implements OnChanges, OnInit {
         console.log(`PREVIOUS info: "${prev.info}"`);
       }
     }
+  }
+
+  ngDoCheck() {
+    // I encourage you to read https://angular.io/guide/lifecycle-hooks#docheck
+    console.log('DoCheck - something was updated somewhere');
   }
 
 }

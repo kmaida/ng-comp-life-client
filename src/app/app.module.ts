@@ -15,9 +15,12 @@ import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.c
 import { McpComponent } from './pages/05-mcp/mcp.component';
 import { DinoContentComponent } from './pages/05-mcp/dino-content/dino-content.component';
 import { OnpushComponent } from './pages/06-onpush/onpush.component';
-import { UpdatesComponent } from './pages/08-updates/updates.component';
 import { OnpushRefsComponent } from './pages/07-onpush-refs/onpush-refs.component';
-import { DinoContentFavComponent } from './pages/08-updates/dino-content-fav/dino-content-fav.component';
+import { DocheckComponent } from './pages/08-docheck/docheck.component';
+import { UpdatesComponent } from './pages/09-updates/updates.component';
+import { DinoContentFavComponent } from './pages/09-updates/dino-content-fav/dino-content-fav.component';
+import { DinoContentDocheckComponent } from './pages/08-docheck/dino-content-docheck/dino-content-docheck.component';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { DinoContentFavComponent } from './pages/08-updates/dino-content-fav/din
     DinoContentComponent,
     OnpushComponent,
     OnpushRefsComponent,
+    DocheckComponent,
+    DinoContentDocheckComponent,
     UpdatesComponent,
     DinoContentFavComponent
   ],

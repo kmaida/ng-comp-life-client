@@ -1,6 +1,6 @@
-<h1 class="text-center">OnPush Change Detection</h1>
+<h1 class="text-center">DoCheck</h1>
 <p class="text-center lead">
-  Demonstrating OnPush change detection in a child component
+  DoCheck responds to widespread change detection
 </p>
 
 <ng-template #noDino>
@@ -36,14 +36,11 @@
   </div>
 
   <!-- dino component -->
-  <app-dino-content-onpush [dino]="dino">
+  <app-dino-content-docheck [dino]="dino">
     <a
       href="https://www.thoughtco.com/things-to-know-giganotosaurus-1093787"
       target="_blank">
       {{ dino.name }}
     </a>
-    <p class="highlight p-1">
-      <em>GigaNOTosaurus</em>, a theropod, should not be confused with <em>GigANTosaurus</em>, which is a sauropod.
-    </p>
-  </app-dino-content-onpush>
+  </app-dino-content-docheck>
 </div>

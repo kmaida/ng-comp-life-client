@@ -15,14 +15,11 @@ class DinoForm {
 }
 
 @Component({
-  selector: 'app-onpush-refs',
-  templateUrl: './onpush-refs.component.html',
-  styles: [`
-    :host ::ng-deep .notes { color: red; }
-    :host ::ng-deep .highlight { background: #ffff67; }
-  `]
+  selector: 'app-docheck',
+  templateUrl: './docheck.component.html',
+  styles: []
 })
-export class OnpushRefsComponent implements OnInit, OnDestroy {
+export class DocheckComponent implements OnInit, OnDestroy {
   dino: IDinosaur;
   formData;
   dinoSub: Subscription;

@@ -1,4 +1,4 @@
-<h1 class="text-center">OnPush with Reference Change</h1>
+<h1 class="text-center">OnPush and OnChanges</h1>
 <p class="text-center lead">
   Demonstrating OnPush change detection in a child component with new references
 </p>
@@ -30,7 +30,10 @@
     <button class="btn btn-success">Update Info</button>
   </form>
 
-  <pre class="my-3">{{ dino | json }}</pre>
+  <div class="my-3">
+    <strong><code>this.dino</code></strong>
+    <pre>{{ dino | json }}</pre>
+  </div>
 
   <!-- dino component -->
   <app-dino-content-onpush [dino]="dino">

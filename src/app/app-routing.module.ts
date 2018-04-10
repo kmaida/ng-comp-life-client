@@ -8,8 +8,9 @@ import { TargetlinksComponent } from './pages/03-targetlinks/targetlinks.compone
 import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.component';
 import { McpComponent } from './pages/05-mcp/mcp.component';
 import { OnpushComponent } from './pages/06-onpush/onpush.component';
-import { UpdatesComponent } from './pages/08-updates/updates.component';
 import { OnpushRefsComponent } from './pages/07-onpush-refs/onpush-refs.component';
+import { UpdatesComponent } from './pages/09-updates/updates.component';
+import { DocheckComponent } from './pages/08-docheck/docheck.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'onpush-refs',
     component: OnpushRefsComponent
+  },
+  {
+    path: 'docheck',
+    component: DocheckComponent
   },
   {
     path: 'updates',

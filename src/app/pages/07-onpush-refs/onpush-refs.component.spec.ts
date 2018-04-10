@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { 06OnpushComponent } from './06-onpush.component';
+import { OnpushRefsComponent } from './onpush-refs.component';
 
-describe('06OnpushComponent', () => {
-  let component: 06OnpushComponent;
-  let fixture: ComponentFixture<06OnpushComponent>;
+describe('OnpushRefsComponent', () => {
+  let component: OnpushRefsComponent;
+  let fixture: ComponentFixture<OnpushRefsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 06OnpushComponent ]
+      declarations: [ OnpushRefsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(06OnpushComponent);
+    fixture = TestBed.createComponent(OnpushRefsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

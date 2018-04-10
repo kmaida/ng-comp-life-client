@@ -3,17 +3,20 @@
   Exploring lifecycle hooks in a child component with inputs
 </p>
 
-<ng-template #noDinos>
+<ng-template #noDino>
   <app-loading *ngIf="loading"></app-loading>
-  <app-error *ngIf="errorList$ | async"></app-error>
+  <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<div *ngIf="dinoList$ | async as dinoList; else noDinos">
-  <app-dino-content-hooks [dino]="getDino(dinoList, 'Giganotosaurus')">
-    <a class="dinoName">{{ getDino(dinoList, 'Giganotosaurus').name }}</a>
-    <span class="icon" *ngIf="getDino(dinoList, 'Giganotosaurus').favorite">🌟</span>
+<div *ngIf="dino$ | async as dino; else noDino">
+  <app-dino-content-hooks [dino]="dino">
+    <a href="https://www.thoughtco.com/things-to-know-giganotosaurus-1093787" target="_blank">{{ dino.name }}</a>
+    <span class="icon" *ngIf="dino.favorite">🌟</span>
     <p class="notes">
       aka "Chickennuggetsaurus"
+    </p>
+    <p class="highlight p-1">
+      <em>GigaNOTosaurus</em>, a theropod, should not be confused with <em>GigANTosaurus</em>, which is a sauropod.
     </p>
   </app-dino-content-hooks>
 </div>

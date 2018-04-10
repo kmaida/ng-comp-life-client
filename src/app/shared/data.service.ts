@@ -24,7 +24,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getDinos$(): Observable<IDinosaur[]> {
-    return this.http.get(`${this._API}/delay/dinosaurs`).pipe(
+    return this.http.get(`${this._API}/dinosaurs`).pipe(
       tap(
         res => {
           this._state = res;
@@ -32,6 +32,12 @@ export class DataService {
           this._errorMsg$.next(null);
         }
       ),
+      catchError((err, caught) => this._onError(err, caught))
+    );
+  }
+
+  getSpecialDino$(): Observable<IDinosaur> {
+    return this.http.get(`${this._API}/special`).pipe(
       catchError((err, caught) => this._onError(err, caught))
     );
   }

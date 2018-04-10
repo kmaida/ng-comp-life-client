@@ -19,14 +19,14 @@ class DinoForm {
 }
 
 @Component({
-  selector: 'app-hooks',
-  templateUrl: './hooks.component.html',
+  selector: 'app-onpush-refs',
+  templateUrl: './onpush-refs.component.html',
   styles: [`
     :host ::ng-deep .notes { color: red; }
     :host ::ng-deep .highlight { background: #ffff67; }
   `]
 })
-export class HooksComponent implements OnInit, OnDestroy {
+export class OnpushRefsComponent implements OnInit, OnDestroy {
   dino: IDinosaur;
   formData;
   dinoSub: Subscription;
@@ -46,16 +46,16 @@ export class HooksComponent implements OnInit, OnDestroy {
         this.error = true;
       }
     );
-    this.formData = new DinoForm();
+    this.resetForm();
   }
 
   submitForm() {
-    if (this.formData.name) {
-      this.dino.name = this.formData.name;
-    }
-    if (this.formData.info) {
-      this.dino.info = this.formData.info;
-    }
+    // Update this.dino reference
+    this.dino = Object.assign({}, this.dino, this.formData);
+    this.resetForm();
+  }
+
+  resetForm() {
     this.formData = new DinoForm();
   }
 

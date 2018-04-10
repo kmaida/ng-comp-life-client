@@ -1,6 +1,6 @@
-<h1 class="text-center">Lifecycle Hooks</h1>
+<h1 class="text-center">OnPush with Reference Change</h1>
 <p class="text-center lead">
-  Exploring lifecycle hooks in a child component with inputs
+  Demonstrating OnPush change detection in a child component with new references
 </p>
 
 <ng-template #noDino>
@@ -33,7 +33,7 @@
   <pre class="my-3">{{ dino | json }}</pre>
 
   <!-- dino component -->
-  <app-dino-content-hooks [dino]="dino">
+  <app-dino-content-onpush [dino]="dino">
     <a
       href="https://www.thoughtco.com/things-to-know-giganotosaurus-1093787"
       target="_blank">
@@ -42,5 +42,5 @@
     <p class="highlight p-1">
       <em>GigaNOTosaurus</em>, a theropod, should not be confused with <em>GigANTosaurus</em>, which is a sauropod.
     </p>
-  </app-dino-content-hooks>
+  </app-dino-content-onpush>
 </div>

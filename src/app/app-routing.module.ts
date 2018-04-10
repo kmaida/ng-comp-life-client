@@ -7,8 +7,9 @@ import { AsyncComponent } from './pages/02-async/async.component';
 import { TargetlinksComponent } from './pages/03-targetlinks/targetlinks.component';
 import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.component';
 import { McpComponent } from './pages/05-mcp/mcp.component';
-import { HooksComponent } from './pages/06-hooks/hooks.component';
-import { UpdatesComponent } from './pages/07-updates/updates.component';
+import { OnpushComponent } from './pages/06-onpush/onpush.component';
+import { UpdatesComponent } from './pages/08-updates/updates.component';
+import { OnpushRefsComponent } from './pages/07-onpush-refs/onpush-refs.component';
 
 const routes: Routes = [
   {
@@ -36,8 +37,12 @@ const routes: Routes = [
     component: McpComponent
   },
   {
-    path: 'hooks',
-    component: HooksComponent
+    path: 'onpush',
+    component: OnpushComponent
+  },
+  {
+    path: 'onpush-refs',
+    component: OnpushRefsComponent
   },
   {
     path: 'updates',

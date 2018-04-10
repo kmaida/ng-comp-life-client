@@ -6,6 +6,11 @@ import { tap, catchError } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 import { IDinosaur } from './dinosaur.model';
 
+function freezeArray(array: IDinosaur[]) {
+  array.forEach(Object.freeze);
+  return array;
+}
+
 @Injectable()
 export class ApiService {
   private _API = 'http://localhost:3005/api';
@@ -30,7 +35,7 @@ export class ApiService {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
       tap(
         res => {
-          const state = [...this._state];
+          const state = freezeArray([...this._state]);
           const index = state.findIndex(d => name === d.name);
           const newState = state.map((dino, i) => {
             if (i === index) {
@@ -54,7 +59,7 @@ export class ApiService {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
       tap(
         res => {
-          const state = [...this._state];
+          const state = freezeArray([...this._state]);
           const index = state.findIndex(d => name === d.name);
           const newState = state.map((dino, i) => {
             if (i === index) {

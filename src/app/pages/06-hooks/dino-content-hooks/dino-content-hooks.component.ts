@@ -26,17 +26,25 @@ export class DinoContentHooksComponent implements OnInit, OnChanges, DoCheck {
   constructor() { }
 
   ngOnInit() {
-    this.original = Object.freeze(Object.assign({}, this.dino));
+    console.log('ngOnInit');
   }
 
   ngDoCheck() {
-    if (this.original.favorite !== this.dino.favorite) {
-      console.log(this.dino.name, 'favorite changed');
-    }
+    // if (this.original.favorite !== this.dino.favorite) {
+    //   console.log(this.dino.name, 'favorite changed');
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('OnChanges:', this.original, changes.dino.currentValue);
+    console.log('ngOnChanges');
+    for (const propName in changes) {
+      if (propName === 'dino') {
+        const change = changes[propName];
+        const cur = change.currentValue;
+        const prev = change.previousValue;
+        // console.log(cur, prev);
+      }
+    }
   }
 
   favDinosaur() {

@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   ViewChildren,
   AfterViewInit,
   QueryList,
@@ -19,7 +20,7 @@ import { _throw } from 'rxjs/observable/throw';
   templateUrl: './hooks.component.html',
   styles: [`:host ::ng-deep .notes { color: red; }`]
 })
-export class HooksComponent implements AfterViewInit, OnDestroy {
+export class HooksComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   errorList$: Observable<string>;
@@ -43,13 +44,15 @@ export class HooksComponent implements AfterViewInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private data: DataService
-  ) {
+  ) { }
+
+  ngOnInit() {
     this._subscribeToHashChange();
     // Set the store observable.
     // We won't catch errors in the UI anymore because
     // the store itself would never emit an error.
     // To track errors, we should set up another stream.
-    this.dinoList$ = data.dinos$.pipe(
+    this.dinoList$ = this.data.dinos$.pipe(
       tap(dinos => {
         if (dinos) {
           // If there are dinos, done loading
@@ -59,7 +62,7 @@ export class HooksComponent implements AfterViewInit, OnDestroy {
         }
       })
     );
-    this.errorList$ = data.errors$.pipe(
+    this.errorList$ = this.data.errors$.pipe(
       tap(msg => {
         if (msg) {
           // If there's an error message,

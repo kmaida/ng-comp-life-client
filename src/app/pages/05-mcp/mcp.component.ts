@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   ViewChildren,
   AfterViewInit,
   QueryList,
@@ -18,7 +19,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './mcp.component.html',
   styles: [`:host ::ng-deep .notes { color: red; }`]
 })
-export class McpComponent implements AfterViewInit, OnDestroy {
+export class McpComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
@@ -40,9 +41,12 @@ export class McpComponent implements AfterViewInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private data: DataService
-  ) {
+  ) { }
+
+  ngOnInit() {
     this._subscribeToHashChange();
-    this.dinoList$ = data.getDinos$().pipe(
+    // Don't fetch data in a component constructor
+    this.dinoList$ = this.data.getDinos$().pipe(
       tap(
         res => this.loading = false,
         err => {

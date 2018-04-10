@@ -14,7 +14,9 @@ export class AsyncComponent implements OnInit {
   loading = true;
   error: boolean;
 
-  constructor(private data: DataService) {
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
     this.dinoList$ = this.data.getDinos$().pipe(
       tap(
         res => {
@@ -28,9 +30,6 @@ export class AsyncComponent implements OnInit {
         }
       )
     );
-  }
-
-  ngOnInit() {
   }
 
 }

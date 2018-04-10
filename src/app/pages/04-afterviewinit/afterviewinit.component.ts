@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   ViewChildren,
   AfterViewInit,
   QueryList,
@@ -18,7 +19,7 @@ import { tap } from 'rxjs/operators';
   templateUrl: './afterviewinit.component.html',
   styles: []
 })
-export class AfterviewinitComponent implements AfterViewInit, OnDestroy {
+export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
@@ -30,7 +31,9 @@ export class AfterviewinitComponent implements AfterViewInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private data: DataService
-  ) {
+  ) { }
+
+  ngOnInit() {
     this._subscribeToHashChange();
     this.dinoList$ = this.data.getDinos$().pipe(
       tap(

@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { ApiService } from '../../shared/api.service';
+import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
@@ -39,10 +39,10 @@ export class McpComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private api: ApiService
+    private data: DataService
   ) {
     this._subscribeToHashChange();
-    this.dinoList$ = api.dinos$.pipe(
+    this.dinoList$ = data.dinos$.pipe(
       tap(
         res => {
           if (res) { this.loading = false; }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ApiService } from '../../shared/api.service';
+import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
@@ -15,8 +15,8 @@ export class TargetlinksComponent implements OnInit {
   loading = true;
   error: boolean;
 
-  constructor(private api: ApiService) {
-    this.dinoList$ = this.api.dinos$.pipe(
+  constructor(private data: DataService) {
+    this.dinoList$ = this.data.dinos$.pipe(
       tap(
         res => {
           if (res) {

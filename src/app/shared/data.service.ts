@@ -12,7 +12,7 @@ function freezeArray(array: IDinosaur[]) {
 }
 
 @Injectable()
-export class ApiService {
+export class DataService {
   private _API = 'http://localhost:3005/api';
   private _state: any;
   private _state$ = new BehaviorSubject<IDinosaur[]>(this._state);
@@ -33,32 +33,11 @@ export class ApiService {
   }
 
   favDino$(name: string): Observable<IDinosaur> {
-    const state = [...this._state];
-    const index = state.findIndex(d => name === d.name);
-    const newState = state.map((dino, i) => {
-      if (i === index) {
-        // This does not update the reference,
-        // it just changes properties. This will
-        // not trigger change detection with OnPush.
-        // This is attempting to mutate an array that
-        // is frozen, which will fail in an error.
-        dino.favorite = true;
-      }
-      return dino;
-    });
-    this._state = newState;
-    this._state$.next(newState);
-    // Make optimistic API call
-    return this.favDinoPost$(name);
-  }
-
-  favDinoOnPush$(name: string): Observable<IDinosaur> {
     // Freeze the array so its objects cannot be mutated
     const state = freezeArray([...this._state]);
     const index = state.findIndex(d => name === d.name);
     const newState = state.map((dino, i) => {
       if (i === index) {
-        // Change reference for the updated dino
         return Object.assign({}, dino, { favorite: true });
       }
       return dino;

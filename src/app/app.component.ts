@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiService } from './shared/api.service';
+import { DataService } from './shared/data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { ApiService } from './shared/api.service';
   styles: []
 })
 export class AppComponent {
-  constructor(private api: ApiService) {
-    api.getDinos$().subscribe();
+  constructor(private data: DataService) {
+    data.getDinos$().subscribe();
   }
 }

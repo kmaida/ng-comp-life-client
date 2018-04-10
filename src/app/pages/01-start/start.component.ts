@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from '../../shared/api.service';
+import { DataService } from '../../shared/data.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { IDinosaur } from './../../shared/dinosaur.model';
@@ -15,10 +15,10 @@ export class StartComponent implements OnInit, OnDestroy {
   loading = true;
   error: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dinoListSub = this.api.dinos$.subscribe(
+    this.dinoListSub = this.data.dinos$.subscribe(
       res => {
         if (res) {
           this.dinoList = res;

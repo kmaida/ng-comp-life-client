@@ -9,16 +9,16 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { ApiService } from '../../shared/api.service';
+import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-onpush',
-  templateUrl: './onpush.component.html',
+  selector: 'app-hooks',
+  templateUrl: './hooks.component.html',
   styles: [`:host ::ng-deep .notes { color: red; }`]
 })
-export class OnpushComponent implements AfterViewInit, OnDestroy {
+export class HooksComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
@@ -40,10 +40,10 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private api: ApiService
+    private data: DataService
   ) {
     this._subscribeToHashChange();
-    this.dinoList$ = api.dinos$.pipe(
+    this.dinoList$ = data.dinos$.pipe(
       tap(
         res => {
           if (res) { this.loading = false; }
@@ -89,9 +89,8 @@ export class OnpushComponent implements AfterViewInit, OnDestroy {
   }
 
   onFavEvent(name: string) {
-    // This one doesn't update references
-    // so OnPush should fail here
-    this.favSub = this.api.favDino$(name).subscribe();
+    // Run optimistic updates and call the API
+    this.favSub = this.data.favDino$(name).subscribe();
   }
 
   ngOnDestroy() {

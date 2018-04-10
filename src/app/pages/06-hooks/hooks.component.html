@@ -1,18 +1,20 @@
-<h1 class="text-center">Dynamic Templates II</h1>
+<h1 class="text-center">Child Component Lifecycle Hooks</h1>
 <p class="text-center lead">
-  Improving dynamic templates with state changes and OnPush change detection
+  Child component with lifecycle hooks
 </p>
 
 <h2 class="text-center">Featured</h2>
-<app-dino-content-onpush [dino]="featuredDino">
-  <a href="http://www.jpost.com/Israel-News/Israeli-geologists-find-unprecedented-85-million-year-old-reptile-remains-390633">
+<app-dino-content-hooks [dino]="featuredDino">
+  <a
+    href="http://www.jpost.com/Israel-News/Israeli-geologists-find-unprecedented-85-million-year-old-reptile-remains-390633"
+    target="_blank">
     {{ featuredDino.name }}
   </a>
   <span class="icon">🌊</span>
   <p class="notes">
     An 85-million-year-old Elasmosaurus fossil was discovered in Israel.
   </p>
-</app-dino-content-onpush>
+</app-dino-content-hooks>
 
 <h2 class="text-center pt-2">Dinosaurs</h2>
 <ng-template #noDinos>
@@ -25,12 +27,12 @@
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
     #dinoElement>
-    <app-dino-content-onpush
+    <app-dino-content-hooks
       [dino]="dino"
       [showFavBtn]="true"
       (favBtnClicked)="onFavEvent($event)">
       <a
-        [routerLink]="['/onpush']"
+        [routerLink]="['/hooks']"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.favorite">
         🌟
@@ -38,6 +40,6 @@
       <p *ngIf="dino.name === 'Giganotosaurus'">
         aka "Chickennuggetsaurus"
       </p>
-    </app-dino-content-onpush>
+    </app-dino-content-hooks>
   </div>
 </div>

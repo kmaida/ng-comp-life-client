@@ -9,19 +9,19 @@ import {
   SimpleChanges,
   DoCheck
 } from '@angular/core';
-import { IDinosaur } from './../dinosaur.model';
+import { IDinosaur } from './../../../shared/dinosaur.model';
 
 @Component({
-  selector: 'app-dino-content-onpush',
-  templateUrl: 'dino-content-onpush.component.html',
+  selector: 'app-dino-content-hooks',
+  templateUrl: 'dino-content-hooks.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DinoContentOnpushComponent implements OnInit, OnChanges, DoCheck {
+export class DinoContentHooksComponent implements OnInit, OnChanges, DoCheck {
   @Input() dino: IDinosaur;
   @Input() showFavBtn: boolean;
   @Output() favBtnClicked = new EventEmitter<string>();
-  previous;
+  previous: IDinosaur;
 
   constructor() { }
 
@@ -34,7 +34,7 @@ export class DinoContentOnpushComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('OnChanges:', changes.dino.previousValue, changes.dino.currentValue);
+    console.log('OnChanges:', this.previous, changes.dino.currentValue);
   }
 
   favDinosaur() {

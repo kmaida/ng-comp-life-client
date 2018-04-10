@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './loading.component';
 import { ErrorComponent } from './error.component';
 import { DinoComponent } from './dino.component';
-import { ApiService } from './api.service';
-import { DinoContentOnpushComponent } from './dino-content-onpush/dino-content-onpush.component';
+import { DataService } from './data.service';
 
 @NgModule({
   imports: [
@@ -13,17 +12,15 @@ import { DinoContentOnpushComponent } from './dino-content-onpush/dino-content-o
   declarations: [
     LoadingComponent,
     ErrorComponent,
-    DinoComponent,
-    DinoContentOnpushComponent
+    DinoComponent
   ],
   exports: [
     LoadingComponent,
     ErrorComponent,
-    DinoComponent,
-    DinoContentOnpushComponent
+    DinoComponent
   ],
   providers: [
-    ApiService
+    DataService
   ]
 })
 export class SharedModule { }

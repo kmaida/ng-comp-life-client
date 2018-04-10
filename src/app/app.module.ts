@@ -14,6 +14,8 @@ import { McpComponent } from './pages/05-mcp/mcp.component';
 import { DinoContentComponent } from './pages/05-mcp/dino-content/dino-content.component';
 import { HooksComponent } from './pages/06-hooks/hooks.component';
 import { DinoContentHooksComponent } from './pages/06-hooks/dino-content-hooks/dino-content-hooks.component';
+import { UpdatesComponent } from './pages/07-updates/updates.component';
+import { DinoContentFavComponent } from './pages/07-updates/dino-content-fav/dino-content-fav.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DinoContentHooksComponent } from './pages/06-hooks/dino-content-hooks/d
     TargetlinksComponent,
     DinoContentComponent,
     HooksComponent,
-    DinoContentHooksComponent
+    DinoContentHooksComponent,
+    UpdatesComponent,
+    DinoContentFavComponent
   ],
   imports: [
     BrowserModule,

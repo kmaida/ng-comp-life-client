@@ -2,6 +2,8 @@ import {
   Component,
   OnInit,
   Input,
+  Output,
+  EventEmitter,
   ChangeDetectionStrategy,
   OnChanges,
   SimpleChanges
@@ -9,13 +11,15 @@ import {
 import { IDinosaur } from './../../../shared/dinosaur.model';
 
 @Component({
-  selector: 'app-dino-content-hooks',
-  templateUrl: 'dino-content-hooks.component.html',
+  selector: 'app-dino-content-fav',
+  templateUrl: 'dino-content-fav.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DinoContentHooksComponent implements OnInit, OnChanges {
+export class DinoContentFavComponent implements OnInit, OnChanges {
   @Input() dino: IDinosaur;
+  @Input() showFavBtn: boolean;
+  @Output() favBtnClicked = new EventEmitter<string>();
   original: IDinosaur;
 
   constructor() { }
@@ -41,6 +45,10 @@ export class DinoContentHooksComponent implements OnInit, OnChanges {
     //     // console.log(cur, prev);
     //   }
     // }
+  }
+
+  favDinosaur() {
+    this.favBtnClicked.emit(this.dino.name);
   }
 
 }

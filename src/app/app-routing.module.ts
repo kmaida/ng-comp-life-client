@@ -8,6 +8,7 @@ import { TargetlinksComponent } from './pages/03-targetlinks/targetlinks.compone
 import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.component';
 import { McpComponent } from './pages/05-mcp/mcp.component';
 import { HooksComponent } from './pages/06-hooks/hooks.component';
+import { UpdatesComponent } from './pages/07-updates/updates.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'hooks',
     component: HooksComponent
+  },
+  {
+    path: 'updates',
+    component: UpdatesComponent
   }
 ];
 

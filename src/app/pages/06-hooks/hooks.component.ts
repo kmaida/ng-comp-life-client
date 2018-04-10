@@ -1,10 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewChildren,
-  AfterViewInit,
-  QueryList,
-  ElementRef,
   OnDestroy
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,36 +14,19 @@ import { _throw } from 'rxjs/observable/throw';
 @Component({
   selector: 'app-hooks',
   templateUrl: './hooks.component.html',
-  styles: [`:host ::ng-deep .notes { color: red; }`]
+  styles: [`:host ::ng-deep .notes { color: green; }`]
 })
-export class HooksComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HooksComponent implements OnInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   errorList$: Observable<string>;
-  @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
-  initDinoElementSub: Subscription;
-  scrollId: string;
   loading = true;
   error: boolean;
   favSub: Subscription;
-  featuredDino: IDinosaur = {
-    name: 'Elasmosaurus',
-    pronunciation: 'ee-LAZ-mo-sore-us',
-    meaningOfName: 'thin plate lizard',
-    diet: 'carnivorous',
-    length: '14m',
-    period: 'Late Cretaceous',
-    mya: '80.5',
-    info: 'Elasmosaurus was an aquatic reptile with an extremely long neck that likely fed on other smaller aquatic fauna like fish, molluscs, and squid. E.D. Cope mistakenly placed the skull of an Elasmosaurus on the much shorter tail rather than the extremely long neck.'
-  };
 
-  constructor(
-    private route: ActivatedRoute,
-    private data: DataService
-  ) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
-    this._subscribeToHashChange();
     // Set the store observable.
     // We won't catch errors in the UI anymore because
     // the store itself would never emit an error.
@@ -74,36 +53,8 @@ export class HooksComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  private _subscribeToHashChange(): void {
-    this.hashSub = this.route.fragment.subscribe(
-      fragment => {
-        this.scrollId = fragment;
-        if (this.dinoList && this.dinoList.length) {
-          this._scrollToAnchor(this.dinoList);
-        }
-      }
-    );
-  }
-
-  ngAfterViewInit() {
-    this.initDinoElementSub = this.dinoList.changes.subscribe(
-      (changes: QueryList<ElementRef>) => {
-        if (this.scrollId) {
-          this._scrollToAnchor(changes);
-          this.initDinoElementSub.unsubscribe();
-        }
-      }
-    );
-  }
-
-  private _scrollToAnchor(queryList: QueryList<ElementRef>): void {
-    const scrollElementRef = queryList.find(
-      (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : false
-    );
-    if (scrollElementRef) {
-      const pos = scrollElementRef.nativeElement.offsetTop;
-      window.scrollTo(0, pos);
-    }
+  getDino(dinos: IDinosaur[], name: string) {
+    return dinos.filter(dino => dino.name === name)[0];
   }
 
   onFavEvent(name: string) {

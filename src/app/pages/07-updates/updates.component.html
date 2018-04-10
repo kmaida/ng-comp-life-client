@@ -1,0 +1,29 @@
+<h1 class="text-center">Optimistic Updates</h1>
+<p class="text-center lead">
+  Optimistic updates with child components
+</p>
+
+<ng-template #noDinos>
+  <app-loading *ngIf="loading"></app-loading>
+  <app-error *ngIf="errorList$ | async"></app-error>
+</ng-template>
+
+<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+  <div
+    *ngFor="let dino of dinoList"
+    id="{{dino.name | lowercase}}"
+    #dinoElement>
+    <app-dino-content-fav
+      [dino]="dino"
+      [showFavBtn]="true"
+      (favBtnClicked)="onFavEvent($event)">
+      <a
+        [routerLink]="['/updates']"
+        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
+      <span class="icon" *ngIf="dino.favorite">🌟</span>
+      <p *ngIf="dino.name === 'Giganotosaurus'">
+        aka "Chickennuggetsaurus"
+      </p>
+    </app-dino-content-fav>
+  </div>
+</div>

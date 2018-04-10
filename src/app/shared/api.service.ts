@@ -42,6 +42,8 @@ export class ApiService {
               // This does not update the reference,
               // it just changes properties. This will
               // not trigger change detection with OnPush.
+              // This is attempting to mutate an array that
+              // is frozen, which will fail in an error.
               dino.favorite = true;
             }
             return dino;

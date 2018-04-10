@@ -15,7 +15,7 @@ export class AsyncComponent implements OnInit {
   error: boolean;
 
   constructor(private data: DataService) {
-    this.dinoList$ = this.data.dinos$.pipe(
+    this.dinoList$ = this.data.getDinos$().pipe(
       tap(
         res => {
           if (res) {

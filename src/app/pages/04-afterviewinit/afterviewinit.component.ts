@@ -32,11 +32,9 @@ export class AfterviewinitComponent implements AfterViewInit, OnDestroy {
     private data: DataService
   ) {
     this._subscribeToHashChange();
-    this.dinoList$ = this.data.dinos$.pipe(
+    this.dinoList$ = this.data.getDinos$().pipe(
       tap(
-        res => {
-          if (res) { this.loading = false; }
-        },
+        res => this.loading = false,
         err => {
           this.loading = false;
           this.error = true;

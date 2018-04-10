@@ -45,12 +45,12 @@ export class DataService {
     this._state = newState;
     this._state$.next(this._state);
     // Make optimistic API call
-    return this.favDinoPost$(name);
+    return this._favDinoPost$(name);
   }
 
-  favDinoPost$(name: string): Observable<IDinosaur> {
+  private _favDinoPost$(name: string): Observable<IDinosaur> {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
-      tap(res => console.log('Success! Dino updated on API', res)),
+      tap(res => console.log('Success! Dino updated on API:', res)),
       catchError((err, caught) => this._onError(err, caught))
     );
   }

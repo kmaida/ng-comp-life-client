@@ -18,12 +18,10 @@ export class StartComponent implements OnInit, OnDestroy {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dinoListSub = this.data.dinos$.subscribe(
+    this.dinoListSub = this.data.getDinos$().subscribe(
       res => {
-        if (res) {
-          this.dinoList = res;
-          this.loading = false;
-        }
+        this.dinoList = res;
+        this.loading = false;
       },
       err => {
         this.loading = false;

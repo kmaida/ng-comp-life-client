@@ -11,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
+import { _throw } from 'rxjs/observable/throw';
 
 @Component({
   selector: 'app-hooks',
@@ -43,16 +44,21 @@ export class HooksComponent implements AfterViewInit, OnDestroy {
     private data: DataService
   ) {
     this._subscribeToHashChange();
-    this.dinoList$ = data.dinos$.pipe(
-      tap(
-        res => {
-          if (res) { this.loading = false; }
-        },
-        err => {
-          this.error = true;
-          this.loading = false;
-        }
-      )
+    // Set the store observable
+    this.dinoList$ = data.dinos$;
+    // Get initial dino data
+    this._initDinos();
+  }
+
+  private _initDinos() {
+    // This call sets up the
+    const dinosSub = this.data.getDinos$().subscribe(
+      res => this.loading = false,
+      err => {
+        this.error = true;
+        this.loading = false;
+      },
+      () => dinosSub.unsubscribe()
     );
   }
 

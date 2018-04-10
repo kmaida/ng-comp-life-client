@@ -11,6 +11,13 @@ import { IDinosaur } from '../../shared/dinosaur.model';
 import { tap, catchError } from 'rxjs/operators';
 import { _throw } from 'rxjs/observable/throw';
 
+class DinoForm {
+  constructor(
+    name?: string,
+    info?: string
+  ) {}
+}
+
 @Component({
   selector: 'app-hooks',
   templateUrl: './hooks.component.html',
@@ -20,24 +27,39 @@ import { _throw } from 'rxjs/observable/throw';
   `]
 })
 export class HooksComponent implements OnInit, OnDestroy {
-  dino$: Observable<IDinosaur>;
+  dino: IDinosaur;
+  formData;
+  dinoSub: Subscription;
   loading = true;
   error: boolean;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dino$ = this.data.getSpecialDino$().pipe(
-      tap(
-        dino => this.loading = false,
-        err => {
-          this.loading = false;
-          this.error = true;
-        }
-      )
+    this.dinoSub = this.data.getSpecialDino$().subscribe(
+      dino => {
+        this.dino = dino;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+        this.error = true;
+      }
     );
+    this.formData = new DinoForm();
+  }
+
+  submitForm() {
+    if (this.formData.name) {
+      this.dino.name = this.formData.name;
+    }
+    if (this.formData.info) {
+      this.dino.info = this.formData.info;
+    }
+    this.formData = new DinoForm();
   }
 
   ngOnDestroy() {
+    this.dinoSub.unsubscribe();
   }
 }

@@ -8,13 +8,37 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<div *ngIf="dino$ | async as dino; else noDino">
+<div *ngIf="dino; else noDino">
+  <!-- update dino -->
+  <form (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="info">Name:</label>
+      <input
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="formData.name">
+    </div>
+    <div class="form-group">
+      <label for="info">Info:</label>
+      <input
+        class="form-control"
+        id="info"
+        name="info"
+        [(ngModel)]="formData.info">
+    </div>
+    <button class="btn btn-success">Update Info</button>
+  </form>
+
+  <pre class="my-3">{{ dino | json }}</pre>
+
+  <!-- dino component -->
   <app-dino-content-hooks [dino]="dino">
-    <a href="https://www.thoughtco.com/things-to-know-giganotosaurus-1093787" target="_blank">{{ dino.name }}</a>
-    <span class="icon" *ngIf="dino.favorite">🌟</span>
-    <p class="notes">
-      aka "Chickennuggetsaurus"
-    </p>
+    <a
+      href="https://www.thoughtco.com/things-to-know-giganotosaurus-1093787"
+      target="_blank">
+      {{ dino.name }}
+    </a>
     <p class="highlight p-1">
       <em>GigaNOTosaurus</em>, a theropod, should not be confused with <em>GigANTosaurus</em>, which is a sauropod.
     </p>

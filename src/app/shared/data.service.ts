@@ -7,16 +7,19 @@ import { _throw } from 'rxjs/observable/throw';
 import { IDinosaur } from './dinosaur.model';
 
 function freezeArray(array: IDinosaur[]) {
+  // Iterate through array and freeze all objects
   array.forEach(Object.freeze);
-  return array;
+  return Object.freeze(array);
 }
 
 @Injectable()
 export class DataService {
   private _API = 'http://localhost:3005/api';
   private _state: any;
-  private _state$ = new BehaviorSubject<IDinosaur[]>(this._state);
+  private _state$ = new BehaviorSubject<IDinosaur[]>(null);
+  private _errorMsg$ = new BehaviorSubject<string>(null);
   dinos$ = this._state$.asObservable();
+  errors$ = this._errorMsg$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +29,7 @@ export class DataService {
         res => {
           this._state = res;
           this._state$.next([...this._state]);
+          this._errorMsg$.next(null);
         }
       ),
       catchError((err, caught) => this._onError(err, caught))
@@ -44,6 +48,7 @@ export class DataService {
     });
     this._state = newState;
     this._state$.next(this._state);
+    this._errorMsg$.next(null);
     // Make optimistic API call
     return this._favDinoPost$(name);
   }
@@ -60,6 +65,8 @@ export class DataService {
     if (err instanceof HttpErrorResponse) {
       errorMsg = err.message;
     }
+    this._errorMsg$.next(errorMsg);
+    this._state$.next(null);
     return _throw(errorMsg);
   }
 

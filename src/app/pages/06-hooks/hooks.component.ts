@@ -22,6 +22,7 @@ import { _throw } from 'rxjs/observable/throw';
 export class HooksComponent implements AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
+  errorList$: Observable<string>;
   @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
   initDinoElementSub: Subscription;
   scrollId: string;
@@ -44,13 +45,26 @@ export class HooksComponent implements AfterViewInit, OnDestroy {
     private data: DataService
   ) {
     this._subscribeToHashChange();
-    // Set the store observable:
-    // When doing this, we won't catch errors in the UI
-    // anymore because the store itself would never emit an error.
+    // Set the store observable.
+    // We won't catch errors in the UI anymore because
+    // the store itself would never emit an error.
     // To track errors, we should set up another stream.
     this.dinoList$ = data.dinos$.pipe(
-      tap(res => {
-        if (res) {
+      tap(dinos => {
+        if (dinos) {
+          // If there are dinos, done loading
+          // No errors
+          this.loading = false;
+          this.error = false;
+        }
+      })
+    );
+    this.errorList$ = data.errors$.pipe(
+      tap(msg => {
+        if (msg) {
+          // If there's an error message,
+          // done loading, show error
+          this.error = true;
           this.loading = false;
         }
       })

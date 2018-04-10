@@ -15,7 +15,8 @@ function freezeArray(array: IDinosaur[]) {
 export class ApiService {
   private _API = 'http://localhost:3005/api';
   private _state: any;
-  dinos$ = new BehaviorSubject<IDinosaur[]>(this._state);
+  private _state$ = new BehaviorSubject<IDinosaur[]>(this._state);
+  dinos$ = this._state$.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +25,7 @@ export class ApiService {
       tap(
         res => {
           this._state = res;
-          this.dinos$.next([...this._state]);
+          this._state$.next([...this._state]);
         }
       ),
       catchError((err, caught) => this._onError(err, caught))
@@ -32,49 +33,45 @@ export class ApiService {
   }
 
   favDino$(name: string): Observable<IDinosaur> {
-    return this.http.post(`${this._API}/fav`, { name }).pipe(
-      tap(
-        res => {
-          const state = freezeArray([...this._state]);
-          const index = state.findIndex(d => name === d.name);
-          const newState = state.map((dino, i) => {
-            if (i === index) {
-              // This does not update the reference,
-              // it just changes properties. This will
-              // not trigger change detection with OnPush.
-              // This is attempting to mutate an array that
-              // is frozen, which will fail in an error.
-              dino.favorite = true;
-            }
-            return dino;
-          });
-          this._state = newState;
-          this.dinos$.next(newState);
-        }
-      ),
-      catchError((err, caught) => this._onError(err, caught))
-    );
+    const state = [...this._state];
+    const index = state.findIndex(d => name === d.name);
+    const newState = state.map((dino, i) => {
+      if (i === index) {
+        // This does not update the reference,
+        // it just changes properties. This will
+        // not trigger change detection with OnPush.
+        // This is attempting to mutate an array that
+        // is frozen, which will fail in an error.
+        dino.favorite = true;
+      }
+      return dino;
+    });
+    this._state = newState;
+    this._state$.next(newState);
+    // Make optimistic API call
+    return this.favDinoPost$(name);
   }
 
   favDinoOnPush$(name: string): Observable<IDinosaur> {
-    // In this case, we update the reference to the updated dino
+    // Freeze the array so its objects cannot be mutated
+    const state = freezeArray([...this._state]);
+    const index = state.findIndex(d => name === d.name);
+    const newState = state.map((dino, i) => {
+      if (i === index) {
+        // Change reference for the updated dino
+        return Object.assign({}, dino, { favorite: true });
+      }
+      return dino;
+    });
+    this._state = newState;
+    this._state$.next(this._state);
+    // Make optimistic API call
+    return this.favDinoPost$(name);
+  }
+
+  favDinoPost$(name: string): Observable<IDinosaur> {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
-      tap(
-        res => {
-          const state = freezeArray([...this._state]);
-          const index = state.findIndex(d => name === d.name);
-          const newState = state.map((dino, i) => {
-            if (i === index) {
-              // Reference has changed for the updated dino;
-              // Change detection will run for the updated dino
-              return Object.assign({}, dino, { favorite: true });
-            }
-            return dino;
-          });
-          this._state = newState;
-          this.dinos$.next(this._state);
-        }
-      ),
+      tap(res => console.log('Success! Dino updated on API', res)),
       catchError((err, caught) => this._onError(err, caught))
     );
   }

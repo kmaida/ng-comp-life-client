@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from './shared/data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
+  constructor(private data: DataService) {
+    // This sets up the store universally
+    data.getDinos$().subscribe();
+  }
 }

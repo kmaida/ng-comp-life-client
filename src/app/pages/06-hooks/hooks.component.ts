@@ -44,21 +44,16 @@ export class HooksComponent implements AfterViewInit, OnDestroy {
     private data: DataService
   ) {
     this._subscribeToHashChange();
-    // Set the store observable
-    this.dinoList$ = data.dinos$;
-    // Get initial dino data
-    this._initDinos();
-  }
-
-  private _initDinos() {
-    // This call sets up the
-    const dinosSub = this.data.getDinos$().subscribe(
-      res => this.loading = false,
-      err => {
-        this.error = true;
-        this.loading = false;
-      },
-      () => dinosSub.unsubscribe()
+    // Set the store observable:
+    // When doing this, we won't catch errors in the UI
+    // anymore because the store itself would never emit an error.
+    // To track errors, we should set up another stream.
+    this.dinoList$ = data.dinos$.pipe(
+      tap(res => {
+        if (res) {
+          this.loading = false;
+        }
+      })
     );
   }
 

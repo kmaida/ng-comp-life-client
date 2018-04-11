@@ -30,10 +30,10 @@ export class DinoContentFavComponent implements OnInit, OnChanges {
         const cur = change.currentValue;
         const prev = change.previousValue;
         const firstChange = change.firstChange;
-        // @TODO: All changes think they are the first change
-        // All changes return undefined as the previous value
-        // Why?
-        console.log(cur, prev, firstChange);
+        if (!firstChange) {
+          console.log('CURRENT:', cur);
+          console.log('PREVIOUS:', prev);
+        }
       }
     }
   }

@@ -10,7 +10,7 @@
 
 <div *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
-    *ngFor="let dino of dinoList"
+    *ngFor="let dino of dinoList; trackBy: trackByFn"
     id="{{dino.name | lowercase}}"
     #dinoElement>
     <app-dino-content-fav

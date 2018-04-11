@@ -19,11 +19,7 @@ export class AsyncComponent implements OnInit {
   ngOnInit() {
     this.dinoList$ = this.data.getDinos$().pipe(
       tap(
-        res => {
-          if (res) {
-            this.loading = false;
-          }
-        },
+        res => this.loading = false,
         err => {
           this.loading = false;
           this.error = true;

@@ -45,7 +45,6 @@ export class McpComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this._subscribeToHashChange();
-    // Don't fetch data in a component constructor
     this.dinoList$ = this.data.getDinos$().pipe(
       tap(
         res => this.loading = false,

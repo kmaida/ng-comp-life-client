@@ -41,7 +41,7 @@ export class OnpushComponent implements OnInit {
     this.resetForm();
   }
 
-  submitForm() {
+  submitForm(): void {
     // Update properties of this.dino
     if (this.formData.name) {
       this.dino.name = this.formData.name;
@@ -52,7 +52,7 @@ export class OnpushComponent implements OnInit {
     this.resetForm();
   }
 
-  resetForm() {
+  resetForm(): void {
     this.formData = new DinoForm();
   }
 }

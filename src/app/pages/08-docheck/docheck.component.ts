@@ -44,15 +44,15 @@ export class DocheckComponent implements OnInit, OnDestroy {
     this.resetForm();
   }
 
-  submitForm() {
-    // Change this.dino reference
-    // We froze this.dino so we cannot mutate it,
-    // but we can update the reference to a new object
+  submitForm(): void {
+    // Change this.dino reference:
+    // we froze this.dino so we cannot mutate its properties.
+    // We should change the reference to a new object
     this.dino = Object.assign({}, this.dino, this.formData);
     this.resetForm();
   }
 
-  resetForm() {
+  resetForm(): void {
     this.formData = new DinoForm();
   }
 

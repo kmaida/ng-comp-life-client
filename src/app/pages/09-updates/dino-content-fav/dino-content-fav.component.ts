@@ -24,7 +24,7 @@ export class DinoContentFavComponent implements OnInit {
   ngOnInit() {
   }
 
-  favDinosaur() {
+  favDinosaur(): void {
     this.favBtnClicked.emit(this.dino.name);
   }
 

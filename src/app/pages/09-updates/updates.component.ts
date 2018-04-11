@@ -18,7 +18,7 @@ import { _throw } from 'rxjs/observable/throw';
 @Component({
   selector: 'app-updates',
   templateUrl: './updates.component.html',
-  styles: [`:host ::ng-deep .notes { color: red; }`]
+  styles: [`:host ::ng-deep .highlight { background: #ffff67; padding: .4rem; }`]
 })
 export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;
@@ -106,7 +106,7 @@ export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  onFavEvent(name: string) {
+  onFavEvent(name: string): void {
     // Run optimistic updates and call the API
     this.favSub = this.data.favDino$(name).subscribe();
   }

@@ -18,7 +18,7 @@
       [showFavBtn]="true"
       (favBtnClicked)="onFavEvent($event)">
       <a
-        [routerLink]="['/updates']"
+        routerLink="/updates"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.favorite">🌟</span>
       <p class="highlight" *ngIf="dino.name === 'Giganotosaurus'">

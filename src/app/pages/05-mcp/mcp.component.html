@@ -29,9 +29,9 @@
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
     #dinoElement>
-    <app-dino-content [dino]="dino" (fav)="onFavEvent($event)">
+    <app-dino-content [dino]="dino">
       <a
-        [routerLink]="['/mcp']"
+        routerLink="/mcp"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.name === 'Parasaurolophus'">
         🌟

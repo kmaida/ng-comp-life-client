@@ -4,9 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy,
-  OnChanges,
-  SimpleChanges
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { IDinosaur } from './../../../shared/dinosaur.model';
 
@@ -16,27 +14,12 @@ import { IDinosaur } from './../../../shared/dinosaur.model';
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DinoContentFavComponent implements OnInit, OnChanges {
+export class DinoContentFavComponent implements OnInit {
   @Input() dino: IDinosaur;
   @Input() showFavBtn: boolean;
   @Output() favBtnClicked = new EventEmitter<string>();
 
   constructor() { }
-
-  ngOnChanges(changes: SimpleChanges) {
-    for (const propName in changes) {
-      if (propName === 'dino') {
-        const change = changes[propName];
-        const cur = change.currentValue;
-        const prev = change.previousValue;
-        const firstChange = change.firstChange;
-        // @TODO: All changes think they are the first change
-        // All changes return undefined as the previous value
-        // Why?
-        console.log(cur, prev, firstChange);
-      }
-    }
-  }
 
   ngOnInit() {
   }

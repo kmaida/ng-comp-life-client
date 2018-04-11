@@ -12,8 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
-import { tap, catchError } from 'rxjs/operators';
-import { _throw } from 'rxjs/observable/throw';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-updates',

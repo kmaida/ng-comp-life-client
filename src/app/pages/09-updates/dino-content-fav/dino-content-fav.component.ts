@@ -29,8 +29,7 @@ export class DinoContentFavComponent implements OnInit, OnChanges {
         const change = changes[propName];
         const cur = change.currentValue;
         const prev = change.previousValue;
-        const firstChange = change.firstChange;
-        if (!firstChange) {
+        if (!change.firstChange) {
           console.log(`%c${cur.name} data was updated in the app!`, 'color: red; font-weight: bold');
           console.log('CURRENT:', cur);
           console.log('PREVIOUS:', prev);

@@ -73,6 +73,12 @@ export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  // Without trackBy, component is re-initialized
+  // every time the reference changes
+  trackByFn(index, item) {
+    return index;
+  }
+
   private _subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
       fragment => {

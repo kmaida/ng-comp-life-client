@@ -61,7 +61,7 @@ export class DataService {
 
   private _favDinoPost$(name: string): Observable<IDinosaur> {
     return this.http.post(`${this._API}/fav`, { name }).pipe(
-      tap(res => console.log('Success! Dino updated on API:', res)),
+      tap(res => console.log(`%c${name} data was updated on the API!`, 'color: green; font-weight: bold;')),
       catchError((err, caught) => this._onError(err, caught))
     );
   }

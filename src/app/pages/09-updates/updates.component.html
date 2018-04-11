@@ -1,6 +1,6 @@
-<h1 class="text-center">Optimistic Updates</h1>
+<h1 class="text-center">Optimistic Updates with OnPush</h1>
 <p class="text-center lead">
-  Optimistic updates with child components
+  Optimistic updates with OnPush child components in an NgFor loop
 </p>
 
 <ng-template #noDinos>
@@ -10,7 +10,7 @@
 
 <div *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
-    *ngFor="let dino of dinoList"
+    *ngFor="let dino of dinoList; trackBy: trackByFn"
     id="{{dino.name | lowercase}}"
     #dinoElement>
     <app-dino-content-fav

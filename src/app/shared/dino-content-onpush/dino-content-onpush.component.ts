@@ -26,7 +26,7 @@ export class DinoContentOnpushComponent implements OnChanges, OnInit {
         const change = changes[propName];
         const cur = change.currentValue;
         const prev = change.previousValue;
-        this.logger(cur, prev);
+        this._logger(cur, prev);
       }
     }
   }
@@ -36,19 +36,25 @@ export class DinoContentOnpushComponent implements OnChanges, OnInit {
     console.log('ngOnInit');
   }
 
-  logger(cur, prev) {
+  private _logger(cur, prev): void {
+    const msg = str => `%c${str}`;
+    const bold = 'font-weight: bold;';
+    const red = 'color: red;';
+    const blue = 'color: blue;';
+    const purple = 'color: DarkViolet;';
+
     if (!prev) {
-      console.log('OnChanges - initial data from Input has loaded!');
+      console.log(msg('OnChanges - initial data from Input has loaded!'), red + bold);
     } else {
       if (cur.name !== prev.name) {
-        console.log('NAME UPDATED');
-        console.log(`CURRENT name: "${cur.name}"`);
-        console.log(`PREVIOUS name: "${prev.name}"`);
+        console.log(msg('NAME UPDATED!'), blue + bold);
+        console.log(msg(`CURRENT name: "${cur.name}"`), blue);
+        console.log(msg(`PREVIOUS name: "${prev.name}"`), blue);
       }
       if (cur.info !== prev.info) {
-        console.log('INFO UPDATED');
-        console.log(`CURRENT info: "${cur.info}"`);
-        console.log(`PREVIOUS info: "${prev.info}"`);
+        console.log(msg('INFO UPDATED!'), purple + bold);
+        console.log(msg(`CURRENT info: "${cur.info}"`), purple);
+        console.log(msg(`PREVIOUS info: "${prev.info}"`), purple);
       }
     }
   }

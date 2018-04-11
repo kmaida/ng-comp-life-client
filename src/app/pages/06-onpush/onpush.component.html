@@ -8,7 +8,7 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<div *ngIf="dino; else noDino">
+<div *ngIf="dino$ | async; else noDino">
   <!-- update dino -->
   <form (ngSubmit)="submitForm()">
     <div class="form-group">
@@ -42,8 +42,5 @@
       target="_blank">
       {{ dino.name }}
     </a>
-    <p class="highlight p-1">
-      <em>GigaNOTosaurus</em>, a theropod, should not be confused with <em>GigANTosaurus</em>, which is a sauropod.
-    </p>
   </app-dino-content-onpush>
 </div>

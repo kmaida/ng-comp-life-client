@@ -1,11 +1,8 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy
-} from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
+import { tap } from 'rxjs/operators';
 
 class DinoForm {
   constructor(
@@ -17,30 +14,29 @@ class DinoForm {
 @Component({
   selector: 'app-onpush',
   templateUrl: './onpush.component.html',
-  styles: [`
-    :host ::ng-deep .notes { color: red; }
-    :host ::ng-deep .highlight { background: #ffff67; }
-  `]
+  styles: []
 })
-export class OnpushComponent implements OnInit, OnDestroy {
+export class OnpushComponent implements OnInit {
   dino: IDinosaur;
   formData;
-  dinoSub: Subscription;
+  dino$: Observable<IDinosaur>;
   loading = true;
   error: boolean;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dinoSub = this.data.getSpecialDino$().subscribe(
-      dino => {
-        this.dino = dino;
-        this.loading = false;
-      },
-      err => {
-        this.loading = false;
-        this.error = true;
-      }
+    this.dino$ = this.data.getSpecialDino$().pipe(
+      tap(
+        res => {
+          this.dino = res;
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.error = true;
+        }
+      )
     );
     this.resetForm();
   }
@@ -58,9 +54,5 @@ export class OnpushComponent implements OnInit, OnDestroy {
 
   resetForm() {
     this.formData = new DinoForm();
-  }
-
-  ngOnDestroy() {
-    this.dinoSub.unsubscribe();
   }
 }

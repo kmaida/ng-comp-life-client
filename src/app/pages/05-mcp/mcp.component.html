@@ -14,7 +14,7 @@
     {{ featuredDino.name }}
   </a>
   <span class="icon">🌊</span>
-  <p class="notes">
+  <p class="highlight">
     An 85-million-year-old Elasmosaurus fossil was discovered in Israel.
   </p>
 </app-dino-content>
@@ -32,7 +32,7 @@
       <span class="icon" *ngIf="dino.name === 'Parasaurolophus'">
         🌟
       </span>
-      <p class="notes" *ngIf="dino.name === 'Giganotosaurus'">
+      <p class="highlight" *ngIf="dino.name === 'Giganotosaurus'">
         aka "Chickennuggetsaurus"
       </p>
     </app-dino-content>

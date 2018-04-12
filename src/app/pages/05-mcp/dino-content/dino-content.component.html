@@ -1,11 +1,13 @@
 <div class="card my-2">
   <div class="card-body">
     <h5 class="card-title">
+      <!-- Content can be projected by selector -->
       <ng-content select="a"></ng-content>
       <ng-content select=".icon"></ng-content>
     </h5>
     <div class="card-text">
-      <ng-content select=".highlight"></ng-content>
+      <!-- Non-specific content can be projected -->
+      <ng-content></ng-content>
     </div>
     <div class="card-text">
       <ul class="list-unstyled">

@@ -16,20 +16,19 @@ import { IDinosaur } from './../dinosaur.model';
 })
 export class DinoContentOnpushComponent implements OnChanges, OnInit {
   @Input() dino: IDinosaur;
-  @Input() logDoCheck: boolean;
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    for (const propName in changes) {
-      if (propName === 'dino') {
-        const change = changes[propName];
-        const cur = change.currentValue;
-        const prev = change.previousValue;
-        this._logger(cur, prev);
-      }
+ngOnChanges(changes: SimpleChanges) {
+  for (const propName in changes) {
+    if (propName === 'dino') {
+      const change = changes[propName];
+      const cur = change.currentValue;
+      const prev = change.previousValue;
+      this._logger(cur, prev);
     }
   }
+}
 
   ngOnInit() {
     // This happens after the first ngOnChanges

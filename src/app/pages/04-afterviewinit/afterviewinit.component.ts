@@ -22,7 +22,7 @@ import { tap } from 'rxjs/operators';
 export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
-  @ViewChildren('dinoElement') dinoList: QueryList<ElementRef>;
+  @ViewChildren('dinoElement') dinoElementsList: QueryList<ElementRef>;
   initDinoElementSub: Subscription;
   scrollId: string;
   loading = true;
@@ -50,15 +50,15 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
     this.hashSub = this.route.fragment.subscribe(
       fragment => {
         this.scrollId = fragment;
-        if (this.dinoList && this.dinoList.length) {
-          this._scrollToAnchor(this.dinoList);
+        if (this.dinoElementsList && this.dinoElementsList.length) {
+          this._scrollToAnchor(this.dinoElementsList);
         }
       }
     );
   }
 
   ngAfterViewInit() {
-    this.initDinoElementSub = this.dinoList.changes.subscribe(
+    this.initDinoElementSub = this.dinoElementsList.changes.subscribe(
       (changes: QueryList<ElementRef>) => {
         if (this.scrollId) {
           this._scrollToAnchor(changes);

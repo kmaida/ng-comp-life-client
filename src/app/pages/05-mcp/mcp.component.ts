@@ -18,7 +18,7 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-mcp',
   templateUrl: './mcp.component.html',
-  styles: [`:host ::ng-deep .highlight { background: #ffff67; padding: .4rem; }`]
+  styles: [`:host ::ng-deep .hl { background: #eee; padding: .4rem; }`]
 })
 export class McpComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;

@@ -6,6 +6,7 @@ import {
   ContentChild,
   ElementRef
 } from '@angular/core';
+import { HighlightDirective } from './../highlight.directive';
 import { IDinosaur } from '../../../shared/dinosaur.model';
 
 @Component({
@@ -17,7 +18,7 @@ export class DinoContentComponent implements OnInit, AfterContentInit {
   @Input() dino: IDinosaur;
   @ContentChild('dinoLink') dinoLink: ElementRef;
   @ContentChild('dinoIcon') dinoIcon: ElementRef;
-  @ContentChild('dinoHighlight') dinoHighlight: ElementRef;
+  @ContentChild(HighlightDirective) dinoHighlight: HighlightDirective;
 
   constructor() { }
 
@@ -33,8 +34,8 @@ export class DinoContentComponent implements OnInit, AfterContentInit {
       console.log(`%cIcon: ${this.dinoIcon.nativeElement.innerText}`, 'color: red; font-weight: bold;');
     }
     if (this.dinoHighlight) {
-      console.log('%cHighlight:', 'color: green; font-weight: bold');
-      console.log(`%c${this.dinoHighlight.nativeElement.innerHTML}`, 'color: green;');
+      console.log('%cHighlight directive:', 'color: green; font-weight: bold');
+      console.log(this.dinoHighlight);
     }
   }
 

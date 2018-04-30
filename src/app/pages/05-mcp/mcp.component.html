@@ -14,11 +14,9 @@
   <a
     href="http://www.jpost.com/Israel-News/Israeli-geologists-find-unprecedented-85-million-year-old-reptile-remains-390633"
     target="_blank"
-    #dinoLink>
-    {{ featuredDino.name }}
-  </a>
+    #dinoLink>{{ featuredDino.name }}</a>
   <span class="icon" #dinoIcon>🌊</span>
-  <p class="highlight" #dinoHighlight>
+  <p class="hl" appHighlight>
     An 85-million-year-old Elasmosaurus fossil was discovered in Israel.
   </p>
 </app-dino-content>
@@ -36,11 +34,13 @@
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span
         class="icon"
-        *ngIf="dino.name === 'Parasaurolophus'">
+        *ngIf="dino.name === 'Parasaurolophus'"
+        #dinoIcon>
         🌟
       </span>
       <p
-        class="highlight"
+        class="hl"
+        appHighlight
         *ngIf="dino.name === 'Giganotosaurus'">
         GigaNOTosaurus (a theropod) should not be confused with GigANTosaurus (a sauropod).
       </p>

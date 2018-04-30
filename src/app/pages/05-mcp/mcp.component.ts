@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChildren,
   AfterViewInit,
+  ContentChild,
   QueryList,
   ElementRef,
   OnDestroy

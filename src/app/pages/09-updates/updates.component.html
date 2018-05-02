@@ -21,7 +21,7 @@
         routerLink="/updates"
         fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.favorite">🌟</span>
-      <p class="highlight" *ngIf="dino.name === 'Giganotosaurus'">
+      <p *ngIf="dino.name === 'Giganotosaurus'" appHighlight>
         aka "Chickennuggetsaurus"
       </p>
     </app-dino-content-fav>

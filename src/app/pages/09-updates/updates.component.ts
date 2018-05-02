@@ -17,7 +17,7 @@ import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-updates',
   templateUrl: './updates.component.html',
-  styles: [`:host ::ng-deep .highlight { background: #ffff67; padding: .4rem; }`]
+  styles: []
 })
 export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;

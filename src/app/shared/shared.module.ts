@@ -5,6 +5,7 @@ import { ErrorComponent } from './error.component';
 import { DinoComponent } from './dino.component';
 import { DataService } from './data.service';
 import { DinoContentOnpushComponent } from './dino-content-onpush/dino-content-onpush.component';
+import { HighlightDirective } from './highlight.directive';
 
 @NgModule({
   imports: [
@@ -14,13 +15,15 @@ import { DinoContentOnpushComponent } from './dino-content-onpush/dino-content-o
     LoadingComponent,
     ErrorComponent,
     DinoComponent,
-    DinoContentOnpushComponent
+    DinoContentOnpushComponent,
+    HighlightDirective
   ],
   exports: [
     LoadingComponent,
     ErrorComponent,
     DinoComponent,
-    DinoContentOnpushComponent
+    DinoContentOnpushComponent,
+    HighlightDirective
   ],
   providers: [
     DataService

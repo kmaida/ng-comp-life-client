@@ -14,7 +14,6 @@ import { TargetlinksComponent } from './pages/03-targetlinks/targetlinks.compone
 import { AfterviewinitComponent } from './pages/04-afterviewinit/afterviewinit.component';
 import { McpComponent } from './pages/05-mcp/mcp.component';
 import { DinoContentComponent } from './pages/05-mcp/dino-content/dino-content.component';
-import { HighlightDirective } from './pages/05-mcp/highlight.directive';
 import { OnpushComponent } from './pages/06-onpush/onpush.component';
 import { OnpushRefsComponent } from './pages/07-onpush-refs/onpush-refs.component';
 import { DocheckComponent } from './pages/08-docheck/docheck.component';
@@ -31,7 +30,6 @@ import { DinoContentDocheckComponent } from './pages/08-docheck/dino-content-doc
     AfterviewinitComponent,
     AsyncComponent,
     McpComponent,
-    HighlightDirective,
     TargetlinksComponent,
     DinoContentComponent,
     OnpushComponent,

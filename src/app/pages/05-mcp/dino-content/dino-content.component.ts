@@ -6,7 +6,7 @@ import {
   ContentChild,
   ElementRef
 } from '@angular/core';
-import { HighlightDirective } from './../highlight.directive';
+import { HighlightDirective } from '../../../shared/highlight.directive';
 import { IDinosaur } from '../../../shared/dinosaur.model';
 
 @Component({

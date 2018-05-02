@@ -16,7 +16,7 @@
     target="_blank"
     #dinoLink>{{ featuredDino.name }}</a>
   <span class="icon" #dinoIcon>🌊</span>
-  <p class="hl" appHighlight>
+  <p appHighlight>
     An 85-million-year-old Elasmosaurus fossil was discovered in Israel.
   </p>
 </app-dino-content>
@@ -39,7 +39,6 @@
         🌟
       </span>
       <p
-        class="hl"
         appHighlight
         *ngIf="dino.name === 'Giganotosaurus'">
         GigaNOTosaurus (a theropod) should not be confused with GigANTosaurus (a sauropod).

@@ -36,6 +36,7 @@ export class DinoContentComponent implements OnInit, AfterContentInit {
     if (this.dinoHighlight) {
       console.log('%cHighlight directive:', 'color: green; font-weight: bold');
       console.log(this.dinoHighlight);
+      this.dinoHighlight.highlight('red');
     }
   }
 

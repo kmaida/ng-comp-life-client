@@ -3,7 +3,7 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
 

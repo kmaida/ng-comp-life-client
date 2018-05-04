@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { _throw } from 'rxjs/observable/throw';
 import { IDinosaur } from './dinosaur.model';
 
 function freezeArray(array: IDinosaur[]) {
@@ -24,7 +22,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getDinos$(): Observable<IDinosaur[]> {
-    return this.http.get(`${this._API}/dinosaurs`).pipe(
+    return this.http.get<IDinosaur[]>(`${this._API}/dinosaurs`).pipe(
       tap(
         res => {
           this._state = res;
@@ -37,7 +35,7 @@ export class DataService {
   }
 
   getSpecialDino$(): Observable<IDinosaur> {
-    return this.http.get(`${this._API}/special`).pipe(
+    return this.http.get<IDinosaur>(`${this._API}/special`).pipe(
       catchError((err, caught) => this._onError(err, caught))
     );
   }
@@ -60,7 +58,7 @@ export class DataService {
   }
 
   private _favDinoPost$(name: string): Observable<IDinosaur> {
-    return this.http.post(`${this._API}/fav`, { name }).pipe(
+    return this.http.post<IDinosaur>(`${this._API}/fav`, { name }).pipe(
       tap(res => console.log(`%c${name} data was updated on the API!`, 'color: green; font-weight: bold;')),
       catchError((err, caught) => this._onError(err, caught))
     );
@@ -73,7 +71,7 @@ export class DataService {
     }
     this._errorMsg$.next(errorMsg);
     this._state$.next(null);
-    return _throw(errorMsg);
+    return throwError(errorMsg);
   }
 
 }

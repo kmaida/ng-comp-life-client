@@ -58,12 +58,7 @@ export class McpComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
-      fragment => {
-        this.scrollId = fragment;
-        if (this.dinoList && this.dinoList.length) {
-          this._scrollToAnchor(this.dinoList);
-        }
-      }
+      fragment => this.scrollId = fragment
     );
   }
 

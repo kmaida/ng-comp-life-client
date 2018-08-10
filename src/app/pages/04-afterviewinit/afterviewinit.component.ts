@@ -22,9 +22,8 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
   hashSub: Subscription;
   dinoList$: Observable<IDinosaur[]>;
   @ViewChildren('dinoElement') dinoElementsList: QueryList<ElementRef>;
-  selectElementRef: ElementRef;
   initDinoElementSub: Subscription;
-  selectId: string;
+  scrollId: string;
   loading = true;
   error: boolean;
 
@@ -48,41 +47,28 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
 
   private _subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
-      fragment => {
-        this.selectId = fragment;
-        if (this.dinoElementsList && this.dinoElementsList.length) {
-          this._selectDino(this.dinoElementsList);
-        }
-      }
+      fragment => this.scrollId = fragment
     );
   }
 
   ngAfterViewInit() {
     this.initDinoElementSub = this.dinoElementsList.changes.subscribe(
       (changes: QueryList<ElementRef>) => {
-        if (this.selectId) {
-          this._selectDino(changes, true);
+        if (this.scrollId) {
+          this._scrollToAnchor(changes);
           this.initDinoElementSub.unsubscribe();
         }
       }
     );
   }
 
-  private _selectDino(queryList: QueryList<ElementRef>, afterViewInit): void {
-    if (this.selectElementRef) {
-      this.selectElementRef.nativeElement.style.backgroundColor = '';
-    }
-    this.selectElementRef = queryList.find(
-      (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.selectId : null
+  private _scrollToAnchor(queryList: QueryList<ElementRef>): void {
+    const scrollElementRef = queryList.find(
+      (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : null
     );
-    if (this.selectElementRef) {
-      if (afterViewInit) {
-        const pos = this.selectElementRef.nativeElement.offsetTop;
-        window.scrollTo(0, pos);
-        console.log('afterViewInit');
-      }
-      const nameLength = this.selectElementRef.nativeElement.innerText.length;
-      this.selectElementRef.nativeElement.style.backgroundColor = 'red';
+    if (scrollElementRef) {
+      const pos = scrollElementRef.nativeElement.offsetTop;
+      window.scrollTo(0, pos);
     }
   }
 

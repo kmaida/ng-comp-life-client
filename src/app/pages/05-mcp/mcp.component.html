@@ -23,7 +23,7 @@
 
 <!-- List of dinosaurs from API -->
 <h2 class="text-center pt-2">Dinosaurs</h2>
-<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+<ng-container *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
@@ -45,4 +45,4 @@
       </p>
     </app-dino-content>
   </div>
-</div>
+</ng-container>

@@ -8,8 +8,8 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+<ng-container *ngIf="dinoList$ | async as dinoList; else noDinos">
   <app-dino
     *ngFor="let dino of dinoList"
     [dino]="dino"></app-dino>
-</div>
+</ng-container>

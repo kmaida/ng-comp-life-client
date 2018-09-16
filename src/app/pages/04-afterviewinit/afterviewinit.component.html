@@ -8,7 +8,7 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+<ng-container *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
     *ngFor="let dino of dinoList"
     id="{{dino.name | lowercase}}"
@@ -20,4 +20,4 @@
       <h3>{{dino.name}}</h3>
     </a>
   </div>
-</div>
+</ng-container>

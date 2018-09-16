@@ -18,9 +18,5 @@
       </ul>
     </div>
     <p class="card-text lead" [innerHTML]="dino.info"></p>
-    <button
-      *ngIf="showFavBtn && !dino.favorite"
-      class="btn btn-sm btn-outline-success"
-      (click)="favDinosaur()">+Fav</button>
   </div>
 </div>

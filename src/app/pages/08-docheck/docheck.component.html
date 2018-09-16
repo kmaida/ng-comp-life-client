@@ -8,7 +8,7 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<div *ngIf="dino; else noDino">
+<ng-container *ngIf="dino; else noDino">
   <!-- Form to update dino's name and info -->
   <form (ngSubmit)="submitForm()">
     <div class="form-group">
@@ -44,4 +44,4 @@
       {{ dino.name }}
     </a>
   </app-dino-content-docheck>
-</div>
+</ng-container>

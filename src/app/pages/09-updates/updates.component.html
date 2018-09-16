@@ -8,7 +8,7 @@
   <app-error *ngIf="errorList$ | async"></app-error>
 </ng-template>
 
-<div *ngIf="dinoList$ | async as dinoList; else noDinos">
+<ng-container *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
     *ngFor="let dino of dinoList; trackBy: trackByFn"
     id="{{dino.name | lowercase}}"
@@ -26,4 +26,4 @@
       </p>
     </app-dino-content-fav>
   </div>
-</div>
+</ng-container>

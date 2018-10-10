@@ -18,7 +18,6 @@ import { IDinosaur } from './../../../shared/dinosaur.model';
 })
 export class DinoContentFavComponent implements OnInit, OnChanges {
   @Input() dino: IDinosaur;
-  @Input() showFavBtn: boolean;
   @Output() favBtnClicked = new EventEmitter<string>();
 
   constructor() { }

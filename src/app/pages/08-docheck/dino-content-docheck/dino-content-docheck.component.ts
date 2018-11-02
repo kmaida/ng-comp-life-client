@@ -26,7 +26,7 @@ export class DinoContentDocheckComponent implements OnChanges, OnInit, DoCheck {
         const change = changes[propName];
         const cur = change.currentValue;
         const prev = change.previousValue;
-        this._logger(cur, prev);
+        this.logger(cur, prev);
       }
     }
   }
@@ -36,7 +36,7 @@ export class DinoContentDocheckComponent implements OnChanges, OnInit, DoCheck {
     console.log('ngOnInit');
   }
 
-  private _logger(cur, prev): void {
+  private logger(cur, prev): void {
     const msg = str => `%c${str}`;
     const bold = 'font-weight: bold;';
     const red = 'color: red;';

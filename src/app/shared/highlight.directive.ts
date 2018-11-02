@@ -4,11 +4,11 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[appHighlight]'
 })
 export class HighlightDirective {
-  private _inactiveColor = '#eee';
+  private inactiveColor = '#eee';
 
   constructor(private el: ElementRef) {
     this.el.nativeElement.style.padding = '.4rem';
-    this.el.nativeElement.style.backgroundColor = this._inactiveColor;
+    this.el.nativeElement.style.backgroundColor = this.inactiveColor;
   }
 
   @HostListener('mouseenter') onMouseEnter() {
@@ -16,7 +16,7 @@ export class HighlightDirective {
   }
 
   @HostListener('mouseleave') onMouseLeave() {
-    this.highlight(this._inactiveColor);
+    this.highlight(this.inactiveColor);
   }
 
   highlight(color: string) {

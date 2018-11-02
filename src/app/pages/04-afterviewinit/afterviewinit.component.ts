@@ -33,7 +33,7 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
   ) { }
 
   ngOnInit() {
-    this._subscribeToHashChange();
+    this.subscribeToHashChange();
     this.dinoList$ = this.data.getDinos$().pipe(
       tap(
         res => this.loading = false,
@@ -45,7 +45,7 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
     );
   }
 
-  private _subscribeToHashChange(): void {
+  private subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
       fragment => this.scrollId = fragment
     );
@@ -55,14 +55,14 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
     this.initDinoElementSub = this.dinoElementsList.changes.subscribe(
       (changes: QueryList<ElementRef>) => {
         if (this.scrollId) {
-          this._scrollToAnchor(changes);
+          this.scrollToAnchor(changes);
           this.initDinoElementSub.unsubscribe();
         }
       }
     );
   }
 
-  private _scrollToAnchor(queryList: QueryList<ElementRef>): void {
+  private scrollToAnchor(queryList: QueryList<ElementRef>): void {
     const scrollElementRef = queryList.find(
       (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : null
     );

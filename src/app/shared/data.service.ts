@@ -12,37 +12,37 @@ function freezeArray(array: IDinosaur[]) {
 
 @Injectable()
 export class DataService {
-  private _API = 'http://localhost:3005/api';
-  private _state: any;
-  private _state$ = new BehaviorSubject<IDinosaur[]>(null);
-  private _errorMsg$ = new BehaviorSubject<string>(null);
-  dinos$ = this._state$.asObservable();
-  errors$ = this._errorMsg$.asObservable();
+  private API = 'http://localhost:3005/api';
+  private state: any;
+  private state$ = new BehaviorSubject<IDinosaur[]>(null);
+  private errorMsg$ = new BehaviorSubject<string>(null);
+  dinos$ = this.state$.asObservable();
+  errors$ = this.errorMsg$.asObservable();
 
   constructor(private http: HttpClient) { }
 
   getDinos$(): Observable<IDinosaur[]> {
-    return this.http.get<IDinosaur[]>(`${this._API}/dinosaurs`).pipe(
+    return this.http.get<IDinosaur[]>(`${this.API}/dinosaurs`).pipe(
       tap(
         res => {
-          this._state = res;
-          this._state$.next([...this._state]);
-          this._errorMsg$.next(null);
+          this.state = res;
+          this.state$.next([...this.state]);
+          this.errorMsg$.next(null);
         }
       ),
-      catchError((err, caught) => this._onError(err, caught))
+      catchError((err, caught) => this.onError(err, caught))
     );
   }
 
   getSpecialDino$(): Observable<IDinosaur> {
-    return this.http.get<IDinosaur>(`${this._API}/special`).pipe(
-      catchError((err, caught) => this._onError(err, caught))
+    return this.http.get<IDinosaur>(`${this.API}/special`).pipe(
+      catchError((err, caught) => this.onError(err, caught))
     );
   }
 
   favDino$(name: string): Observable<IDinosaur> {
     // Freeze the array so its objects cannot be mutated
-    const state = freezeArray([...this._state]);
+    const state = freezeArray([...this.state]);
     const index = state.findIndex(d => name === d.name);
     const newState = state.map((dino, i) => {
       if (i === index) {
@@ -50,27 +50,27 @@ export class DataService {
       }
       return dino;
     });
-    this._state = newState;
-    this._state$.next(this._state);
-    this._errorMsg$.next(null);
+    this.state = newState;
+    this.state$.next(this.state);
+    this.errorMsg$.next(null);
     // Make optimistic API call
-    return this._favDinoPost$(name);
+    return this.favDinoPost$(name);
   }
 
-  private _favDinoPost$(name: string): Observable<IDinosaur> {
-    return this.http.post<IDinosaur>(`${this._API}/fav`, { name }).pipe(
+  private favDinoPost$(name: string): Observable<IDinosaur> {
+    return this.http.post<IDinosaur>(`${this.API}/fav`, { name }).pipe(
       tap(res => console.log(`%c${name} data was updated on the API!`, 'color: green; font-weight: bold;')),
-      catchError((err, caught) => this._onError(err, caught))
+      catchError((err, caught) => this.onError(err, caught))
     );
   }
 
-  private _onError(err: HttpErrorResponse | any, caught) {
+  private onError(err: HttpErrorResponse | any, caught) {
     let errorMsg = 'Error: Unable to complete request.';
     if (err instanceof HttpErrorResponse) {
       errorMsg = err.message;
     }
-    this._errorMsg$.next(errorMsg);
-    this._state$.next(null);
+    this.errorMsg$.next(errorMsg);
+    this.state$.next(null);
     return throwError(errorMsg);
   }
 

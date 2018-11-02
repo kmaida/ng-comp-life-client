@@ -26,12 +26,12 @@
 <ng-container *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
     *ngFor="let dino of dinoList"
-    id="{{dino.name | lowercase}}"
+    id="{{ dino.name | lowercase }}"
     #dinoElement>
     <app-dino-content [dino]="dino">
       <a
         routerLink="/mcp"
-        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
+        fragment="{{ dino.name | lowercase }}">{{ dino.name }}</a>
       <span
         class="icon"
         *ngIf="dino.name === 'Parasaurolophus'"

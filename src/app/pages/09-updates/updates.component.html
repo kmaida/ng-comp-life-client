@@ -11,14 +11,14 @@
 <ng-container *ngIf="dinoList$ | async as dinoList; else noDinos">
   <div
     *ngFor="let dino of dinoList; trackBy: trackByFn"
-    id="{{dino.name | lowercase}}"
+    id="{{ dino.name | lowercase }}"
     #dinoElement>
     <app-dino-content-fav
       [dino]="dino"
       (favBtnClicked)="onFavEvent($event)">
       <a
         routerLink="/updates"
-        fragment="{{dino.name | lowercase}}">{{ dino.name }}</a>
+        fragment="{{ dino.name | lowercase }}">{{ dino.name }}</a>
       <span class="icon" *ngIf="dino.favorite">🌟</span>
       <p *ngIf="dino.name === 'Giganotosaurus'" appHighlight>
         aka "Chickennuggetsaurus"

@@ -45,7 +45,7 @@ export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this._subscribeToHashChange();
+    this.subscribeToHashChange();
     // Set the store observable.
     // We won't catch errors in the UI anymore because
     // the store itself would never emit an error.
@@ -78,7 +78,7 @@ export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
     return index;
   }
 
-  private _subscribeToHashChange(): void {
+  private subscribeToHashChange(): void {
     this.hashSub = this.route.fragment.subscribe(
       fragment => this.scrollId = fragment
     );
@@ -88,14 +88,14 @@ export class UpdatesComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initDinoElementSub = this.dinoList.changes.subscribe(
       (changes: QueryList<ElementRef>) => {
         if (this.scrollId) {
-          this._scrollToAnchor(changes);
+          this.scrollToAnchor(changes);
           this.initDinoElementSub.unsubscribe();
         }
       }
     );
   }
 
-  private _scrollToAnchor(queryList: QueryList<ElementRef>): void {
+  private scrollToAnchor(queryList: QueryList<ElementRef>): void {
     const scrollElementRef = queryList.find(
       (el: ElementRef) => el && el.nativeElement ? el.nativeElement.id === this.scrollId : false
     );

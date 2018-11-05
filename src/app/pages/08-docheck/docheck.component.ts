@@ -33,8 +33,6 @@ export class DocheckComponent implements OnInit, OnDestroy {
       dino => {
         this.dino = dino;
         this.loading = false;
-        // Freeze the dino so we can't mutate it
-        Object.freeze(this.dino);
       },
       err => {
         this.loading = false;
@@ -45,10 +43,13 @@ export class DocheckComponent implements OnInit, OnDestroy {
   }
 
   submitForm(): void {
-    // Change this.dino reference:
-    // we froze this.dino so we cannot mutate its properties.
-    // We should change the reference to a new object
-    this.dino = Object.assign({}, this.dino, this.formData);
+    // Update properties of this.dino
+    if (this.formData.name) {
+      this.dino.name = this.formData.name;
+    }
+    if (this.formData.info) {
+      this.dino.info = this.formData.info;
+    }
     this.resetForm();
   }
 

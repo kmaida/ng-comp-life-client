@@ -31,9 +31,9 @@ export class DinoContentDocheckComponent implements OnInit, OnChanges, DoCheck {
   }
 
   ngDoCheck() {
-    // I encourage you to read https://angular.io/guide/lifecycle-hooks#docheck
+    // Read https://angular.io/guide/lifecycle-hooks#docheck
     // and http://bit.ly/angularindepth-docheck
-    console.log('%cDoCheck - change detection ran', 'color: grey');
+    console.log('%cDoCheck', 'color: grey');
     if (this.info !== this.dino.info) {
       this.cd.markForCheck();
     }

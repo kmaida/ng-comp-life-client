@@ -19,25 +19,24 @@ class DinoForm {
 export class OnpushComponent implements OnInit {
   dino: IDinosaur;
   formData;
-  dino$: Observable<IDinosaur>;
+  dino$: Observable<IDinosaur> = this.data.getSpecialDino$().pipe(
+    tap(
+      res => {
+        this.dino = res;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+        this.error = true;
+      }
+    )
+  );
   loading = true;
   error: boolean;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dino$ = this.data.getSpecialDino$().pipe(
-      tap(
-        res => {
-          this.dino = res;
-          this.loading = false;
-        },
-        err => {
-          this.loading = false;
-          this.error = true;
-        }
-      )
-    );
     this.resetForm();
   }
 

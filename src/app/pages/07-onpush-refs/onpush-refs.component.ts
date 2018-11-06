@@ -19,27 +19,26 @@ class DinoForm {
 export class OnpushRefsComponent implements OnInit {
   dino: IDinosaur;
   formData;
-  dino$: Observable<IDinosaur>;
+  dino$: Observable<IDinosaur> = this.data.getSpecialDino$().pipe(
+    tap(
+      res => {
+        this.dino = res;
+        this.loading = false;
+        // Freeze dino so we can't mutate it
+        Object.freeze(this.dino);
+      },
+      err => {
+        this.loading = false;
+        this.error = true;
+      }
+    )
+  );
   loading = true;
   error: boolean;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dino$ = this.data.getSpecialDino$().pipe(
-      tap(
-        res => {
-          this.dino = res;
-          this.loading = false;
-          // Freeze dino so we can't mutate it
-          Object.freeze(this.dino);
-        },
-        err => {
-          this.loading = false;
-          this.error = true;
-        }
-      )
-    );
     this.resetForm();
   }
 

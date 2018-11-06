@@ -1,9 +1,9 @@
 import {
   Component,
-  OnInit,
-  OnDestroy
+  OnInit
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { DataService } from '../../shared/data.service';
 import { IDinosaur } from '../../shared/dinosaur.model';
 
@@ -19,17 +19,9 @@ class DinoForm {
   templateUrl: './docheck.component.html',
   styles: []
 })
-export class DocheckComponent implements OnInit, OnDestroy {
-  dino: IDinosaur;
-  formData;
-  dinoSub: Subscription;
-  loading = true;
-  error: boolean;
-
-  constructor(private data: DataService) { }
-
-  ngOnInit() {
-    this.dinoSub = this.data.getSpecialDino$().subscribe(
+export class DocheckComponent implements OnInit {
+  dino$: Observable<IDinosaur> = this.data.getSpecialDino$().pipe(
+    tap(
       dino => {
         this.dino = dino;
         this.loading = false;
@@ -38,7 +30,16 @@ export class DocheckComponent implements OnInit, OnDestroy {
         this.loading = false;
         this.error = true;
       }
-    );
+    )
+  );
+  dino: IDinosaur;
+  formData;
+  loading = true;
+  error: boolean;
+
+  constructor(private data: DataService) { }
+
+  ngOnInit() {
     this.resetForm();
   }
 
@@ -57,7 +58,4 @@ export class DocheckComponent implements OnInit, OnDestroy {
     this.formData = new DinoForm();
   }
 
-  ngOnDestroy() {
-    this.dinoSub.unsubscribe();
-  }
 }

@@ -8,7 +8,7 @@
   <app-error *ngIf="error"></app-error>
 </ng-template>
 
-<ng-container *ngIf="dino; else noDino">
+<ng-container *ngIf="dino$ | async as dino; else noDino">
   <!-- Form to update dino's name and info -->
   <form (ngSubmit)="submitForm()">
     <div class="form-group">

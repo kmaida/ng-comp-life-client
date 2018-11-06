@@ -10,22 +10,21 @@ import { tap } from 'rxjs/operators';
   styles: []
 })
 export class AsyncComponent implements OnInit {
-  dinoList$: Observable<IDinosaur[]>;
+  dinoList$: Observable<IDinosaur[]> = this.data.getDinos$().pipe(
+    tap(
+      res => this.loading = false,
+      err => {
+        this.loading = false;
+        this.error = true;
+      }
+    )
+  );
   loading = true;
   error: boolean;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.dinoList$ = this.data.getDinos$().pipe(
-      tap(
-        res => this.loading = false,
-        err => {
-          this.loading = false;
-          this.error = true;
-        }
-      )
-    );
   }
 
 }

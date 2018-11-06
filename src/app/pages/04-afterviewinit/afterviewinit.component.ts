@@ -20,7 +20,15 @@ import { tap } from 'rxjs/operators';
 })
 export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy {
   hashSub: Subscription;
-  dinoList$: Observable<IDinosaur[]>;
+  dinoList$: Observable<IDinosaur[]> = this.data.getDinos$().pipe(
+    tap(
+      res => this.loading = false,
+      err => {
+        this.loading = false;
+        this.error = true;
+      }
+    )
+  );
   @ViewChildren('dinoElement') dinoElementsList: QueryList<ElementRef>;
   initDinoElementSub: Subscription;
   scrollId: string;
@@ -34,15 +42,6 @@ export class AfterviewinitComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnInit() {
     this.subscribeToHashChange();
-    this.dinoList$ = this.data.getDinos$().pipe(
-      tap(
-        res => this.loading = false,
-        err => {
-          this.loading = false;
-          this.error = true;
-        }
-      )
-    );
   }
 
   private subscribeToHashChange(): void {

@@ -5,7 +5,9 @@ import { tap, catchError } from 'rxjs/operators';
 import { IDinosaur } from './dinosaur.model';
 
 function freezeArray(array: IDinosaur[]) {
-  // Iterate through array and freeze all objects
+  // Iterate through array and freeze all objects.
+  // Note: this is not a deep freeze, as our data
+  // currently does not require it.
   array.forEach(Object.freeze);
   return Object.freeze(array);
 }

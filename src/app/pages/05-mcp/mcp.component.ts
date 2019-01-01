@@ -36,14 +36,14 @@ export class McpComponent implements OnInit, AfterViewInit, OnDestroy {
   loading = true;
   error: boolean;
   featuredDino: IDinosaur = {
-    name: 'Elasmosaurus',
-    pronunciation: 'ee-LAZ-mo-sore-us',
-    meaningOfName: 'thin plate lizard',
-    diet: 'carnivorous',
-    length: '14m',
-    period: 'Late Cretaceous',
-    mya: '80.5',
-    info: 'Elasmosaurus was an aquatic reptile with an extremely long neck that likely fed on other smaller aquatic fauna like fish, molluscs, and squid. E.D. Cope mistakenly placed the skull of an Elasmosaurus on the much shorter tail rather than the extremely long neck.'
+    name: 'Stegosaurus',
+    pronunciation: 'STE-go-sore-us',
+    meaningOfName: 'roof lizard',
+    diet: 'herbivorous',
+    length: '6m',
+    period: 'Late Jurassic',
+    mya: '155-150',
+    info: 'Probably the most famous dinosaur ever to hail from Colorado, and the official fossil of the Centennial State, Stegosaurus was named by the American paleontologist Othniel C. Marsh based on bones recovered from Colorado\'s portion of the Morrison Formation.'
   };
 
   constructor(
